@@ -1,0 +1,25 @@
+﻿@page
+@model BookLinks.Web.Pages.MyBooks.MyDetailsModel
+@{
+    ViewData["Title"] = "MyDetails";
+}
+
+<div>
+    <h2>Book - @Html.DisplayFor(model => model.Book.Id)</h2>
+    <div class="col-md-4">
+        <h4>
+            @Html.DisplayFor(model => model.Book.Name)
+        </h4>
+    </div>
+    <div class="col-md-4">
+        <h6>
+            @Html.DisplayFor(model => model.Book.Author)
+        </h6>
+    </div>
+    <div class="col-md-4">
+        @Html.DisplayFor(model => model.Book.Description)
+    </div>
+    <div>
+        <a asp-page="./My" class="btn btn-success mt-2">Back to List</a>
+    </div>
+</div>

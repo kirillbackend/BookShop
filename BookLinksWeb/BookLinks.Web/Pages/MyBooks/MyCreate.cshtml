@@ -1,0 +1,45 @@
+﻿@page
+@model BookLinks.Web.Pages.MyBooks.MyCreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Book</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        @using(Html.BeginForm("My","MyBooks", FormMethod.Post))
+        {
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mt-2 mb-2">
+                <label asp-for="Book.Name" class="control-label mt-2"></label>
+                <input asp-for="Book.Name" class="form-control mt-2" />
+                <span asp-validation-for="Book.Name" class="text-danger mt-2"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Description" class="control-label mt-2"></label>
+                <input asp-for="Book.Description" class="form-control mt-2" />
+                <span asp-validation-for="Book.Description" class="text-danger mt-2"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Author" class="control-label mt-2"></label>
+                <input asp-for="Book.Author" class="form-control mt-2" />
+                <span asp-validation-for="Book.Author" class="text-danger mt-2"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success mt-4 mb-2" />
+                <a asp-page="My" class="btn btn-danger mt-4 mb-2">Back to MyBooks</a>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

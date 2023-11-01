@@ -1,9 +1,8 @@
-﻿using BookLinks.Common.Enums;
-using BookLinks.Repositories.Models;
+﻿using BookLinks.Repositories.Models;
 
-namespace BookLinks.Service.Services.Interface
+namespace BookLinks.Repositories.Repositories.Interface
 {
-    public interface IBookService
+    public interface IBookRepository
     {
         Task<List<Book>> GetBooksAsync();
         Task<Book> GetBookByIdAsync(int? id);

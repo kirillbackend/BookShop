@@ -1,0 +1,45 @@
+﻿@page
+@model BookLinks.Web.Pages.MyBooks.MyModel
+@{
+    ViewData["Title"] = "MyIndex";
+}
+
+<h1>My <a asp-page="MyCreate" class="btn btn-success">Add new +</a></h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].Author)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Book)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="col-md-6">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    <a asp-page="./MyEdit" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+                    <a asp-page="./MyDetails" asp-route-id="@item.Id" class="btn btn-success">Details</a>
+                    <a asp-page="./MyDelete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
