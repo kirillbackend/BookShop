@@ -9,5 +9,6 @@ namespace BookLinks.Service.Services.Interface
         Task<Book> GetBookByIdAsync(int? id);
         Task<Book> AddBookAsync(Book book);
         Task DeleteBookAsync(int? id);
+        Task UpdateBookAsync(Book book);
     }
 }

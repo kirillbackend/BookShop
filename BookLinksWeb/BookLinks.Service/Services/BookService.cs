@@ -64,5 +64,17 @@ namespace BookLinks.Service.Services
                 throw new ArgumentNullException(nameof(id));
             }
         }
+
+        public async Task UpdateBookAsync(Book book)
+        {
+            if (book != null)
+            {
+                await _repository.UpdateBookAsync(book);
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(book));
+            }
+        }
     }
 }

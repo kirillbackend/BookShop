@@ -6,9 +6,6 @@
 
 <h1>My <a asp-page="MyCreate" class="btn btn-success">Add new +</a></h1>
 
-<p>
- 
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -31,15 +28,15 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>
+                <td class="col-md-6">
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Author)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
-                    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-success">Details</a>
+                    <a asp-page="./MyEdit" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+                    <a asp-page="./MyDetails" asp-route-id="@item.Id" class="btn btn-success">Details</a>
                     <a asp-page="./MyDelete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                 </td>
             </tr>

@@ -52,5 +52,11 @@ namespace BookLinks.Repositories.Repositories
                 throw new ArgumentNullException(nameof(book));
             }
         }
+
+        public async Task UpdateBookAsync(Book book)
+        {
+            _context.Books.Update(book);
+            await _context.SaveChangesAsync();
+        }
     }
 }
