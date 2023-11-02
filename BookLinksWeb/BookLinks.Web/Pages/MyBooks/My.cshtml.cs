@@ -1,5 +1,7 @@
+using BookLinks.Common.Enums;
 using BookLinks.Repositories.Models;
 using BookLinks.Service.Services.Interface;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BookLinks.Web.Pages.MyBooks
@@ -7,17 +9,30 @@ namespace BookLinks.Web.Pages.MyBooks
     public class MyModel : PageModel
     {
         private readonly IBookService _bookService;
-
         public MyModel(IBookService bookService)
         {
             _bookService = bookService;
         }
 
         public IList<Book> Book { get; set; } = default!;
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
 
-        public async Task OnGet()
+        [BindProperty(SupportsGet = true)]
+        public BookOptiosEnum Option { get; set; }
+
+        public async Task OnGetAsync()
         {
-            Book = await _bookService.GetBooksAsync();
-        } 
+            var allBook = await _bookService.GetBooksAsync();
+
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                Book = await _bookService.GetFilterBook(SearchString, allBook, Option);
+            }
+            else
+            {
+                Book = allBook;
+            }
+        }
     }
 }

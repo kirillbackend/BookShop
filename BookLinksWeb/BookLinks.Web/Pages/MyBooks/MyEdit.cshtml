@@ -17,20 +17,36 @@
                 <span asp-validation-for="Book.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Book.Description" class="control-label"></label>
-                <input asp-for="Book.Description" class="form-control" />
-                <span asp-validation-for="Book.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Book.Author" class="control-label"></label>
                 <input asp-for="Book.Author" class="form-control" />
                 <span asp-validation-for="Book.Author" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Released" class="control-label"></label>
+                <input asp-for="Book.Released" class="form-control" />
+                <span asp-validation-for="Book.Released" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Description" class="control-label"></label>
+                <textarea asp-for="Book.Description" class="form-control mt-2" rows="4"> </textarea>
+                <span asp-validation-for="Book.Description" class="text-danger"></span>
             </div>
             <div class="form-group mt-2">
                 <input type="submit" value="Save" class="btn btn-success" />
                 <a asp-page="./My" class="btn btn-danger">Back to MyBook</a>
             </div>
+            <div class="form-group mt-2">
+                <input type="hidden" asp-for="Book.Created" class="form-control" />
+            </div>
         </form>
+    </div>
+    <div>
+        <div class="col-md-4">
+            @Html.DisplayFor(model => model.Book.Created)
+        </div>
+        <div class="col-md-4">
+            @Html.DisplayFor(model => model.Book.Update)
+        </div>
     </div>
 </div>
 

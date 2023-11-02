@@ -1,10 +1,24 @@
 ﻿@page
+@using BookLinks.Common.Enums;
 @model BookLinks.Web.Pages.MyBooks.MyModel
 @{
     ViewData["Title"] = "MyIndex";
 }
 
-<h1>My <a asp-page="MyCreate" class="btn btn-success">Add new +</a></h1>
+<form >
+    <a asp-page="MyCreate" class="btn btn-success mb-2">Add new +</a>
+    <input type="submit" value="Поиск" class="btn btn-success mb-2" />
+    <input type="text" asp-for="SearchString" placeholder="Поиск" class="form-control">
+
+    <select asp-for="Option" class="form-select mt-3">
+        @foreach (var item in Enum.GetValues(typeof(BookOptiosEnum))
+        .Cast<BookOptiosEnum>()
+        .Select(e => new { Name = e.ToString() }))
+        {
+            <option value="@item.Name"> @item.Name </option>
+        }
+    </select>
+</form>
 
 <table class="table">
     <thead>
@@ -13,10 +27,10 @@
                 @Html.DisplayNameFor(model => model.Book[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Book[0].Description)
+                @Html.DisplayNameFor(model => model.Book[0].Author)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Book[0].Author)
+                @Html.DisplayNameFor(model => model.Book[0].Released)
             </th>
             <th></th>
         </tr>
@@ -25,16 +39,16 @@
         @foreach (var item in Model.Book)
         {
             <tr>
-                <td>
+                <td class="col-md-3">
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td class="col-md-6">
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
+                <td class="col-md-1">
                     @Html.DisplayFor(modelItem => item.Author)
                 </td>
-                <td>
+                <td class="col-md-5">
+                    @Html.DisplayFor(modelItem => item.Released)
+                </td>
+                <td class="col-md-5">
                     <a asp-page="./MyEdit" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
                     <a asp-page="./MyDetails" asp-route-id="@item.Id" class="btn btn-success">Details</a>
                     <a asp-page="./MyDelete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>

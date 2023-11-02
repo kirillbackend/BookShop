@@ -1,21 +1,16 @@
 using BookLinks.Repositories;
 using Microsoft.EntityFrameworkCore;
-using BookLinks.Web.Data;
 using BookLinks.Service.Services.Interface;
 using BookLinks.Service.Services;
 using BookLinks.Repositories.Repositories.Interface;
 using BookLinks.Repositories.Repositories;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages().AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddTransient<IBookRepository, BookRepository>();
-
-builder.Services.AddDbContext<BookLinksWebContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BookLinksWebContext") ?? throw new InvalidOperationException("Connection string 'BookLinksWebContext' not found.")));
-
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("WebApiDatabase")));
 
 var app = builder.Build();
