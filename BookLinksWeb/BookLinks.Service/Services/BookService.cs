@@ -1,4 +1,5 @@
-﻿using BookLinks.Repositories.Models;
+﻿using BookLinks.Common.Enums;
+using BookLinks.Repositories.Models;
 using BookLinks.Repositories.Repositories.Interface;
 using BookLinks.Service.Services.Interface;
 
@@ -44,6 +45,7 @@ namespace BookLinks.Service.Services
         {
             if (book != null)
             {
+                book.Created = DateTime.Now;
                 await _repository.AddBookAsync(book);
                 return book;
             }
@@ -69,11 +71,39 @@ namespace BookLinks.Service.Services
         {
             if (book != null)
             {
+                book.Update = DateTime.Now;
                 await _repository.UpdateBookAsync(book);
             }
             else
             {
                 throw new ArgumentNullException(nameof(book));
+            }
+        }
+
+        public async Task<IList<Book>> GetFilterBook(string? SearchString, List<Book> allBooks, BookOptiosEnum Option)
+        {
+            int parsedId = -1;
+            if (Option == BookOptiosEnum.id && !int.TryParse(SearchString, out parsedId))
+            {
+                throw new ArgumentException(nameof(Option));
+            }
+            else
+            {
+                var books = new List<Book>();
+                var filters = new Dictionary<BookOptiosEnum, Func<IList<Book>, IList<Book>>>()
+                {
+                    {BookOptiosEnum.id, (list) => list = list.Where(l => l.Id == parsedId).ToList()},
+                    {BookOptiosEnum.Name, (list) => list = list.Where(l => l.Name.Contains(SearchString)).ToList()},
+                    {BookOptiosEnum.Description, (list) => list = list.Where(l => l.Description.Contains(SearchString)).ToList()},
+                    {BookOptiosEnum.Author, (list) => list = list.Where(l => l.Author.Contains(SearchString)).ToList()}
+                };
+
+                if (filters.ContainsKey(Option))
+                {
+                    books = filters[Option](allBooks).ToList();
+                }
+
+                return books;
             }
         }
     }

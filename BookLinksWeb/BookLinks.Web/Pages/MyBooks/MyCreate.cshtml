@@ -6,8 +6,6 @@
 }
 
 <h1>Create</h1>
-
-<h4>Book</h4>
 <hr />
 
 <div class="row">
@@ -21,14 +19,19 @@
                 <span asp-validation-for="Book.Name" class="text-danger mt-2"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Book.Description" class="control-label mt-2"></label>
-                <input asp-for="Book.Description" class="form-control mt-2" />
-                <span asp-validation-for="Book.Description" class="text-danger mt-2"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Book.Author" class="control-label mt-2"></label>
                 <input asp-for="Book.Author" class="form-control mt-2" />
                 <span asp-validation-for="Book.Author" class="text-danger mt-2"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Description" class="control-label mt-2"></label>
+                <textarea asp-for="Book.Description" class="form-control mt-2" rows="4"> </textarea>
+                <span asp-validation-for="Book.Description" class="text-danger mt-2"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.Released" class="control-label mt-2"></label>
+                <input asp-for="Book.Released" class="form-control mt-2" />
+                <span asp-validation-for="Book.Released" class="text-danger mt-2"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-success mt-4 mb-2" />

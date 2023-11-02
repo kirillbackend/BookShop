@@ -10,5 +10,6 @@ namespace BookLinks.Service.Services.Interface
         Task<Book> AddBookAsync(Book book);
         Task DeleteBookAsync(int? id);
         Task UpdateBookAsync(Book book);
+        Task<IList<Book>> GetFilterBook(string? SearchString, List<Book> allBooks, BookOptiosEnum Option);
     }
 }
