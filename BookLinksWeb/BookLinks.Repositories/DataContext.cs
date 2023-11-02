@@ -11,10 +11,10 @@ namespace BookLinks.Repositories
         public DataContext(IConfiguration configuration)
         {
             _configuration = configuration; 
-        }
-            
+        } 
+
         public DbSet<Book> Books { get; set; }
-                
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite(_configuration.GetConnectionString("WebApiDatabase"));

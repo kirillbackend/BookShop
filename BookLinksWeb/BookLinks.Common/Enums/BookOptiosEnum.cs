@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BookLinks.Common.Enums
 {
@@ -13,8 +8,6 @@ namespace BookLinks.Common.Enums
         id = 0,
         [Display(Name = "Название")]
         Name = 1,
-        [Display(Name = "Описание")]
-        Description = 2,
         [Display(Name = "Автор")]
         Author = 3
     }

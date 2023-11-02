@@ -6,21 +6,30 @@
 }
 
 <form >
-    <a asp-page="MyCreate" class="btn btn-success mb-2">Add new +</a>
-    <input type="submit" value="Поиск" class="btn btn-success mb-2" />
-    <input type="text" asp-for="SearchString" placeholder="Поиск" class="form-control">
-
-    <select asp-for="Option" class="form-select mt-3">
-        @foreach (var item in Enum.GetValues(typeof(BookOptiosEnum))
-        .Cast<BookOptiosEnum>()
-        .Select(e => new { Name = e.ToString() }))
-        {
-            <option value="@item.Name"> @item.Name </option>
-        }
-    </select>
+    <div class="row g-3 mb-4">
+        <div class="d-grid gap-2 col-2">
+            <a asp-page="MyCreate" class="btn btn-success rounded-pill">Add new +</a>
+        </div>
+        <div class="d-grid gap-2 col-2">
+            <input type="submit" value="Поиск" class="btn btn-success rounded-pill" />
+        </div>
+        <div class="col-md-4">
+            <input type="text" asp-for="SearchString" placeholder="Поиск" class="form-control rounded-pill">
+        </div>
+        <div class="col-md-4">
+            <select asp-for="Option" class="form-select rounded-pill">
+                @foreach (var item in Enum.GetValues(typeof(BookOptiosEnum))
+                .Cast<BookOptiosEnum>()
+                .Select(e => new { Name = e.ToString() }))
+                {
+                    <option value="@item.Name"> @item.Name </option>
+                }
+            </select>
+        </div>
+    </div>
 </form>
 
-<table class="table">
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>
@@ -32,26 +41,30 @@
             <th>
                 @Html.DisplayNameFor(model => model.Book[0].Released)
             </th>
-            <th></th>
+            <th>
+                <label>Дайствия</label>
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Book)
         {
             <tr>
-                <td class="col-md-3">
+                <td class="col-md-7">
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td class="col-md-1">
+                <td class="col-md-2">
                     @Html.DisplayFor(modelItem => item.Author)
                 </td>
-                <td class="col-md-5">
+                <td class="col-md-2">
                     @Html.DisplayFor(modelItem => item.Released)
                 </td>
-                <td class="col-md-5">
-                    <a asp-page="./MyEdit" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
-                    <a asp-page="./MyDetails" asp-route-id="@item.Id" class="btn btn-success">Details</a>
-                    <a asp-page="./MyDelete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                <td class="col-md-1">
+                    <div class="btn-group" role="group" aria-label="Простой пример">
+                        <a asp-page="./MyEdit" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
+                        <a asp-page="./MyDetails" asp-route-id="@item.Id" class="btn btn-success">Details</a>
+                        <a asp-page="./MyDelete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                    </div>
                 </td>
             </tr>
         }

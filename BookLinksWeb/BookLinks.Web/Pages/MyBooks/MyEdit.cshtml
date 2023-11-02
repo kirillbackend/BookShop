@@ -7,7 +7,7 @@
 
 <h4>Edit Book</h4>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Book.Id" />
@@ -32,8 +32,10 @@
                 <span asp-validation-for="Book.Description" class="text-danger"></span>
             </div>
             <div class="form-group mt-2">
-                <input type="submit" value="Save" class="btn btn-success" />
-                <a asp-page="./My" class="btn btn-danger">Back to MyBook</a>
+                <div class="btn-group" role="group" aria-label="Простой пример">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                    <a asp-page="./My" class="btn btn-danger">Back to MyBook</a>
+                </div>
             </div>
             <div class="form-group mt-2">
                 <input type="hidden" asp-for="Book.Created" class="form-control" />
