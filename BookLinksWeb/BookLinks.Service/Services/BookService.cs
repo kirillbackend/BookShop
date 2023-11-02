@@ -94,7 +94,6 @@ namespace BookLinks.Service.Services
                 {
                     {BookOptiosEnum.id, (list) => list = list.Where(l => l.Id == parsedId).ToList()},
                     {BookOptiosEnum.Name, (list) => list = list.Where(l => l.Name.Contains(SearchString)).ToList()},
-                    {BookOptiosEnum.Description, (list) => list = list.Where(l => l.Description.Contains(SearchString)).ToList()},
                     {BookOptiosEnum.Author, (list) => list = list.Where(l => l.Author.Contains(SearchString)).ToList()}
                 };
 

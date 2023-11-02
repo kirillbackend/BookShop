@@ -9,7 +9,7 @@
 <hr />
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="form-floating mb-3">
         @using(Html.BeginForm("My","MyBooks", FormMethod.Post))
         {
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -34,8 +34,10 @@
                 <span asp-validation-for="Book.Released" class="text-danger mt-2"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-success mt-4 mb-2" />
-                <a asp-page="My" class="btn btn-danger mt-4 mb-2">Back to MyBooks</a>
+                <div class="btn-group" role="group" aria-label="Простой пример">
+                    <input type="submit" value="Create" class="btn btn-success mt-4 mb-2" />
+                    <a asp-page="My" class="btn btn-danger mt-4 mb-2">Back to MyBooks</a>
+                </div>
             </div>
         }
     </div>
