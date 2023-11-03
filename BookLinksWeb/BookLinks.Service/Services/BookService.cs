@@ -93,8 +93,8 @@ namespace BookLinks.Service.Services
                 var filters = new Dictionary<BookOptiosEnum, Func<IList<Book>, IList<Book>>>()
                 {
                     {BookOptiosEnum.id, (list) => list = list.Where(l => l.Id == parsedId).ToList()},
-                    {BookOptiosEnum.Name, (list) => list = list.Where(l => l.Name.Contains(SearchString)).ToList()},
-                    {BookOptiosEnum.Author, (list) => list = list.Where(l => l.Author.Contains(SearchString)).ToList()}
+                    {BookOptiosEnum.Name, (list) => list = list.Where(l => l.Name.ToLower().Contains(SearchString.ToLower())).ToList()},
+                    {BookOptiosEnum.Author, (list) => list = list.Where(l => l.Author.ToLower().Contains(SearchString.ToLower())).ToList()}
                 };
 
                 if (filters.ContainsKey(Option))

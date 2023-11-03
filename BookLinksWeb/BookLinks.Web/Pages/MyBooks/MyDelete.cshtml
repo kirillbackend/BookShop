@@ -6,13 +6,13 @@
 
 <div class="row">
     <h2>
-        Are you sure you want to delete the book @Html.DisplayFor(m => m.Book.Name);?
+        Вы уверены что хотите удалить книгу "@Html.DisplayFor(m => m.Book.Name)"?
     </h2>
 
     <form method="post">
         <input type="hidden" asp-for="Book.Id" />
-        <input type="submit" value="Yes" class="btn btn-success mt-4 mb-2" />
-        <a asp-page="My" class="btn btn-danger mt-4 mb-2">No</a>
+        <input type="submit" value="Да" class="btn btn-success mt-4 mb-2 rounded-pill" />
+        <a asp-page="My" class="btn btn-danger mt-4 mb-2 rounded-pill">Нет</a>
     </form>
 </div>
 

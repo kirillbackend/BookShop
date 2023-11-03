@@ -14,9 +14,9 @@ namespace BookLinks.Web.Pages.MyBooks
             _bookService = bookService;
         }
 
-        [BindProperty] 
+        [BindProperty]
         public Book Book { get; set; } = default!;
-
+        
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

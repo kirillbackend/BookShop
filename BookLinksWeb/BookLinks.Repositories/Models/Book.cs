@@ -26,5 +26,6 @@ namespace BookLinks.Repositories.Models
         [Display(Name = "Дата редоктирования записи")]
         public DateTime Update { get; set; }
 
+        public List<Link> Links { get; set; }
     }
 }

@@ -14,7 +14,9 @@ namespace BookLinks.Repositories
         } 
 
         public DbSet<Book> Books { get; set; }
-        
+
+        public DbSet<Link> Links { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite(_configuration.GetConnectionString("WebApiDatabase"));
