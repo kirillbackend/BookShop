@@ -1,0 +1,52 @@
+﻿@page
+@model BookLinks.Web.Pages.MyBooks.MyEditLinksModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>Изменение ссылки.</h4>
+<div class="row">
+    <div>
+        <a asp-page="MyCreateLinks" class="btn btn-success mt-4 mb-2 rounded-pill">Создать</a>
+        <a asp-page="MyEditLinks" class="btn btn-success mt-4 mb-2 rounded-pill">Изменить</a>
+        <a asp-page="MyDeleteLinks" class="btn btn-danger mt-4 mb-2 rounded-pill">Удалить</a>
+    </div>
+    <div class="col-md-12">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label> Id ссылки </label>
+            <div class="form-group">
+                <select asp-for="@Model.Link.Id" class="form-select">
+                    @foreach (var item in Model.Links)
+                    {
+                        <option value="@item.Id">@item.Id</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label> Id книги </label>
+                <select asp-for="@Model.Link.BookId" class="form-select">
+                    @foreach (var item in Model.Links)
+                    {
+                        <option value="@item.BookId">@item.BookId</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Link.Path" class="control-label"> Путь </label>
+                <input asp-for="Link.Path" class="form-control" />
+                <span asp-validation-for="Link.Path" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Сохранить изменения" class="btn btn-success rounded-pill" />
+                <a asp-page="./My" class="btn btn-danger rounded-pill">Отмена</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

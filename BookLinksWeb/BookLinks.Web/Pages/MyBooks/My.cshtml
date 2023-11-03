@@ -8,15 +8,18 @@
 <form >
     <div class="row g-3 mb-4">
         <div class="d-grid gap-2 col-2">
-            <a asp-page="MyCreate" class="btn btn-success rounded-pill">Add new +</a>
+            <a asp-page="MyCreate" class="btn btn-success rounded-pill">Книги</a>
+        </div>
+        <div class="d-grid gap-2 col-2">
+            <a asp-page="MyCreateLinks" class="btn btn-success rounded-pill">Ссылки</a>
         </div>
         <div class="d-grid gap-2 col-2">
             <input type="submit" value="Поиск" class="btn btn-success rounded-pill" />
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <input type="text" asp-for="SearchString" placeholder="Поиск" class="form-control rounded-pill">
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <select asp-for="Option" class="form-select rounded-pill">
                 @foreach (var item in Enum.GetValues(typeof(BookOptiosEnum))
                 .Cast<BookOptiosEnum>()
@@ -50,7 +53,7 @@
         @foreach (var item in Model.Book)
         {
             <tr>
-                <td class="col-md-7">
+                <td class="col-md-4">
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td class="col-md-2">
@@ -59,12 +62,10 @@
                 <td class="col-md-2">
                     @Html.DisplayFor(modelItem => item.Released)
                 </td>
-                <td class="col-md-1">
-                    <div class="btn-group" role="group" aria-label="Простой пример">
-                        <a asp-page="./MyEdit" asp-route-id="@item.Id" class="btn btn-success">Edit</a>
-                        <a asp-page="./MyDetails" asp-route-id="@item.Id" class="btn btn-success">Details</a>
-                        <a asp-page="./MyDelete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-                    </div>
+                <td class="col-md-3">
+                    <a asp-page="./MyEdit" asp-route-id="@item.Id" class="btn btn-success rounded-pill">Изменить</a>
+                    <a asp-page="./MyDetails" asp-route-id="@item.Id" class="btn btn-success rounded-pill">Информация</a>
+                    <a asp-page="./MyDelete" asp-route-id="@item.Id" class="btn btn-danger rounded-pill">Удалить</a>
                 </td>
             </tr>
         }

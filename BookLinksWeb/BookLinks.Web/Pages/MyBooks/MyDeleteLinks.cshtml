@@ -1,0 +1,34 @@
+﻿@page
+@model BookLinks.Web.Pages.MyBooks.MyDeleteLinksModel
+
+@{
+    ViewData["Title"] = "MyDeleteLinks";
+}
+
+<div class="row">
+    <h4>Удаление ссылки.</h4>
+    <div>
+        <a asp-page="MyCreateLinks" class="btn btn-success mt-4 mb-2 rounded-pill">Создать</a>
+        <a asp-page="MyEditLinks" class="btn btn-success mt-4 mb-2 rounded-pill">Изменить</a>
+        <a asp-page="MyDeleteLinks" class="btn btn-danger mt-4 mb-2 rounded-pill">Удалить</a>
+    </div>
+
+    <h2>
+        Вы уверены что хотите удалить ссылку?
+    </h2>
+
+
+
+    <form method="post">
+        <div class="form-group">
+            <select asp-for="@Model.Id" class="form-select">
+                @foreach (var item in Model.Links)
+                {
+                    <option value="@item.Id">@item.Id</option>
+                }
+            </select>
+        </div>
+        <input type="submit" value="Да" class="btn btn-success mt-4 mb-2 rounded-pill" />
+        <a asp-page="My" class="btn btn-danger mt-4 mb-2 rounded-pill">Нет</a>
+    </form>
+</div>

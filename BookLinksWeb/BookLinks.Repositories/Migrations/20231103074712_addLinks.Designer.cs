@@ -3,6 +3,7 @@ using System;
 using BookLinks.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookLinks.Repositories.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231103074712_addLinks")]
+    partial class addLinks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
@@ -66,7 +69,7 @@ namespace BookLinks.Repositories.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("Links");
+                    b.ToTable("Link");
                 });
 
             modelBuilder.Entity("BookLinks.Repositories.Models.Link", b =>

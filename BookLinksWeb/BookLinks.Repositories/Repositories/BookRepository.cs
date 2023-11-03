@@ -23,7 +23,7 @@ namespace BookLinks.Repositories.Repositories
         {
             if (id != null)
             {
-                var books = await _context.Books.FirstAsync(i => i.Id == id);
+                var books = await _context.Books.Include(link => link.Links).FirstAsync(i => i.Id == id);
                 return books;
             }
             else
