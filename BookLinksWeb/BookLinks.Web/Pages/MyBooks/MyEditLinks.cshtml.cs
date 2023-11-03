@@ -1,6 +1,5 @@
 using BookLinks.Repositories.Models;
 using BookLinks.Repositories.Repositories.Interface;
-using BookLinks.Service.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -20,7 +19,6 @@ namespace BookLinks.Web.Pages.MyBooks
 
         [BindProperty]
         public Link Link { get; set; } = default!;
-
 
         public async Task<IActionResult> OnGetAsync()
         {

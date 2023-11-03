@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BookLinks.Common.Enums;
-using BookLinks.Repositories.Models;
+﻿using BookLinks.Repositories.Models;
 using BookLinks.Repositories.Repositories.Interface;
 
 namespace BookLinks.Repositories.Repositories

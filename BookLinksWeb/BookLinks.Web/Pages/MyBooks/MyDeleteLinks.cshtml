@@ -12,13 +12,7 @@
         <a asp-page="MyEditLinks" class="btn btn-success mt-4 mb-2 rounded-pill">Изменить</a>
         <a asp-page="MyDeleteLinks" class="btn btn-danger mt-4 mb-2 rounded-pill">Удалить</a>
     </div>
-
-    <h2>
-        Вы уверены что хотите удалить ссылку?
-    </h2>
-
-
-
+    <h2>Вы уверены что хотите удалить ссылку?</h2>
     <form method="post">
         <div class="form-group">
             <select asp-for="@Model.Id" class="form-select">
