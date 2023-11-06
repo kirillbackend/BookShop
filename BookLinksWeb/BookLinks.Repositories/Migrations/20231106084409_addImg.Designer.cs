@@ -3,6 +3,7 @@ using System;
 using BookLinks.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookLinks.Repositories.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231106084409_addImg")]
+    partial class addImg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
@@ -25,7 +28,6 @@ namespace BookLinks.Repositories.Migrations
 
                     b.Property<string>("Author")
                         .IsRequired()
-                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Created")
@@ -33,7 +35,6 @@ namespace BookLinks.Repositories.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ImageContent")
@@ -42,7 +43,6 @@ namespace BookLinks.Repositories.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("OriginalFileName")
@@ -53,6 +53,10 @@ namespace BookLinks.Repositories.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Released")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ServerFileName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Update")

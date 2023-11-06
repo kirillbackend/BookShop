@@ -4,23 +4,63 @@
     ViewData["Title"] = "MyDetails";
 }
 
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                <h2>Книга - @Html.DisplayFor(model => model.Book.Id)</h2>
+            </th>
+            <th>
+                <h4>
+                    @Html.DisplayFor(model => model.Book.Name)
+                </h4>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @if (@Model.Book.ImageContent != "")
+                {
+                    <img src="@Model.Book.ImageContent" />
+                }
+                else
+                {
+                    <img src="/img/notimage.jpg" />
+                }
+            </td>
+            <td>
+                <div class="col-md-12">
+                    <div>
+                        <h4>
+                            <label> Рэйтинг </label>
+                            @Html.DisplayFor(model => model.Book.Rating)
+                            <label> ★ </label>
+                        </h4>
+                    </div>
+                    <div>
+                        <h4>
+                            <label> Дата релиза </label>
+                            @Html.DisplayFor(model => model.Book.Released)
+                        </h4>
+                    </div>
+                    <div>
+                        <h4>
+                            <label> Автор </label>
+                            @Html.DisplayFor(model => model.Book.Author)
+                        </h4>
+                    </div>
+                    <div>
+                        <h5>Описание</h5>
+                        @Html.DisplayFor(model => model.Book.Description)
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
 <div>
-    <h2>Книга - @Html.DisplayFor(model => model.Book.Id)</h2>
-    <div class="col-md-4">
-        <h4>
-            @Html.DisplayFor(model => model.Book.Name) -
-            @Html.DisplayFor(model => model.Book.Released)
-        </h4>
-    </div>
-    <div class="col-md-4">
-        <h6>
-            @Html.DisplayFor(model => model.Book.Author)
-        </h6>
-    </div>
-    <div class="col-md-4 mt-4">
-        <h5>Описание</h5>
-        @Html.DisplayFor(model => model.Book.Description)
-    </div>
     <div class="mt-2">
         @foreach (var item in Model.Book.Links)
         {

@@ -9,6 +9,8 @@ namespace BookLinks.Common.Enums
         [Display(Name = "Название")]
         Name = 1,
         [Display(Name = "Автор")]
-        Author = 3
+        Author = 3,
+        [Display(Name = "Рэйтинг")]
+        Rating = 4
     }
 }

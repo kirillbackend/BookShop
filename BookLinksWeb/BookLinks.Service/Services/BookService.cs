@@ -2,16 +2,19 @@
 using BookLinks.Repositories.Models;
 using BookLinks.Repositories.Repositories.Interface;
 using BookLinks.Service.Services.Interface;
+using FS.Services.Services.Contracts;
 
 namespace BookLinks.Service.Services
 {
     public class BookService : IBookService
     {
         private readonly IBookRepository _repository;
+        private readonly IFileService _fileService;
 
-        public BookService(IBookRepository repository)
+        public BookService(IBookRepository repository, IFileService fileService)
         {
             _repository = repository;
+            _fileService = fileService;
         }
 
         public async Task<List<Book>> GetBooksAsync()
@@ -45,6 +48,7 @@ namespace BookLinks.Service.Services
         {
             if (book != null)
             {
+                await _fileService.ProcessPhoto(book);
                 book.Created = DateTime.Now;
                 await _repository.AddBookAsync(book);
                 return book;
@@ -71,6 +75,7 @@ namespace BookLinks.Service.Services
         {
             if (book != null)
             {
+                await _fileService.ProcessPhoto(book);
                 book.Update = DateTime.Now;
                 await _repository.UpdateBookAsync(book);
             }
@@ -83,7 +88,8 @@ namespace BookLinks.Service.Services
         public async Task<IList<Book>> GetFilterBook(string? SearchString, List<Book> allBooks, BookOptiosEnum Option)
         {
             int parsedId = -1;
-            if (Option == BookOptiosEnum.id && !int.TryParse(SearchString, out parsedId))
+            if ((Option == BookOptiosEnum.id && !int.TryParse(SearchString, out parsedId))
+                || (Option == BookOptiosEnum.Rating && !int.TryParse(SearchString, out parsedId)))
             {
                 throw new ArgumentException(nameof(Option));
             }
@@ -94,7 +100,8 @@ namespace BookLinks.Service.Services
                 {
                     {BookOptiosEnum.id, (list) => list = list.Where(l => l.Id == parsedId).ToList()},
                     {BookOptiosEnum.Name, (list) => list = list.Where(l => l.Name.ToLower().Contains(SearchString.ToLower())).ToList()},
-                    {BookOptiosEnum.Author, (list) => list = list.Where(l => l.Author.ToLower().Contains(SearchString.ToLower())).ToList()}
+                    {BookOptiosEnum.Author, (list) => list = list.Where(l => l.Author.ToLower().Contains(SearchString.ToLower())).ToList()},
+                    {BookOptiosEnum.Rating, (list) => list = list.Where(l => l.Rating == parsedId).ToList()}
                 };
 
                 if (filters.ContainsKey(Option))

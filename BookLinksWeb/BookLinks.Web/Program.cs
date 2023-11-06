@@ -5,6 +5,8 @@ using BookLinks.Service.Services;
 using BookLinks.Repositories.Repositories.Interface;
 using BookLinks.Repositories.Repositories;
 using System.Text.Json.Serialization;
+using FS.Services.Services.Contracts;
+using FS.Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,7 @@ builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddTransient<IBookRepository, BookRepository>();
 builder.Services.AddTransient<ILinkService, LinkService>();
 builder.Services.AddTransient<ILinkRepository, LinkRepository>();
+builder.Services.AddTransient<IFileService, FileService>();
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("WebApiDatabase")));
 
 var app = builder.Build();

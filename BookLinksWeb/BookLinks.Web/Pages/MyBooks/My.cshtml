@@ -42,6 +42,9 @@
                 @Html.DisplayNameFor(model => model.Book[0].Author)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Book[0].Rating)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Book[0].Released)
             </th>
             <th>
@@ -59,7 +62,22 @@
                 <td class="col-md-2">
                     @Html.DisplayFor(modelItem => item.Author)
                 </td>
-                <td class="col-md-2">
+                <td class="col-md-1">
+                    @if (item.Rating == 0)
+                    {
+                        <label>☆☆☆☆☆</label>
+                    }
+                    else
+                    {
+                        <label>
+                            @for (int i = 0; i < item.Rating; i++)
+                            {
+                                <a>★</a>
+                            }
+                        </label>
+                    }
+                </td>
+                <td class="col-md-1">
                     @Html.DisplayFor(modelItem => item.Released)
                 </td>
                 <td class="col-md-3">
