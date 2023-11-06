@@ -9,7 +9,7 @@ namespace BookLinks.Repositories.Models
         [Required]
         public string Name { get; set; }
 
-        [StringLength(1000, MinimumLength = 3)]
+        [StringLength(10000, MinimumLength = 3)]
         [Display(Name = "Описание")]
         public string Description { get; set; }
 
