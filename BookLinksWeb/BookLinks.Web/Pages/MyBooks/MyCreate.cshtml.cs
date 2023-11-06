@@ -24,7 +24,7 @@ namespace BookLinks.Web.Pages.MyBooks
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || Book == null)
+            if (Book == null)
             {
                 return Page();
             }

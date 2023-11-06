@@ -35,15 +35,8 @@ namespace BookLinks.Web.Pages.MyBooks
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-            else
-            {
-                await _bookService.UpdateBookAsync(Book);
-               return RedirectToPage("./My");
-            }
+            await _bookService.UpdateBookAsync(Book);
+            return RedirectToPage("./My");
         }
     }
 }

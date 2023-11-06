@@ -32,6 +32,15 @@
                 <span asp-validation-for="Book.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Book.Rating" class="control-label mt-2"></label>
+                <input asp-for="Book.Rating" class="form-control mt-2" />
+                <span asp-validation-for="Book.Rating" class="text-danger mt-2"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Book.OriginalFileName" class="control-label mt-2"> Обложка книги </label>
+                <input asp-for="Book.OriginalFileName" class="form-control" type="file">
+            </div>
+            <div class="form-group">
                 <input type="hidden" asp-for="Book.Links" class="form-control" />
             </div>
             <div class="form-group mt-2">
@@ -46,11 +55,11 @@
     <div>
         <div class="col-md-4">
             @Html.Label("Дата последнего изменения книги"): 
-            @Html.DisplayFor(model => model.Book.Created)
+            @Html.DisplayFor(model => model.Book.Update)
         </div>
         <div class="col-md-4">
             @Html.Label("Дата создания книги"):
-            @Html.DisplayFor(model => model.Book.Update)
+            @Html.DisplayFor(model => model.Book.Created)
         </div>
     </div>
 </div>
