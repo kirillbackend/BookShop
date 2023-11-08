@@ -4,23 +4,45 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <div clacc="row">
-        <h1 class="mb-4">
-            Каталог BookLinks
-        </h1>
-        <div class="col-12">
-            @foreach (var item in Model.Book)
+
+
+
+<div class="container-fluid">
+    <h1 class="text-center">
+        Каталог BookLinks
+    </h1>
+    @foreach (var row in Model.Book
+    .Select((item, index) => new { item, index })
+    .GroupBy(_ => _.index / 4, _ => _.item)
+    )
+    {
+        <div class="row">
+            @foreach (var item in row)
             {
-                @if (item.ImageContent == "")
-                {
-                    <a asp-page="/MyBooks/MyDetails" asp-route-id="@item.Id"><img src="/img/notimage.jpg" width="250" height="350"/></a>
-                }
-                else
-                {
-                    <a asp-page="/MyBooks/MyDetails" asp-route-id="@item.Id"><img src="@item.ImageContent" width="250" height="350" /></a>
-                }
+                <div class="col-3 mb-2">
+                    <div>
+                        <div class="mb-2">
+                            @if (item.ImageContent == "")
+                            {
+                                <a asp-page="/MyBooks/MyDetails" asp-route-id="@item.Id"><img src="/img/notimage.jpg" width="280" height="390" /></a>
+                            }
+                            else
+                            {
+                                <a asp-page="/MyBooks/MyDetails" asp-route-id="@item.Id"><img src="@item.ImageContent" width="280" height="390" /></a>
+                            }
+                        </div>
+                        <div class="mb-2">
+                            <div class="col-10">
+                                <a asp-page="/MyBooks/MyDetails" asp-route-id="@item.Id">
+                                    <span>@item.Name</span> <br>
+                                    <span>@item.Author</span> <br>
+                                    <span>Рэйтинг:  @item.Rating</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
         </div>
-   </div>
+    }
 </div>
