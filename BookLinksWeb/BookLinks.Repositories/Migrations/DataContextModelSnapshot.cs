@@ -33,7 +33,7 @@ namespace BookLinks.Repositories.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(60)
+                        .HasMaxLength(10000)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ImageContent")
@@ -81,6 +81,64 @@ namespace BookLinks.Repositories.Migrations
                     b.HasIndex("BookId");
 
                     b.ToTable("Links");
+                });
+
+            modelBuilder.Entity("BookLinks.Repositories.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("BrowserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsBanned")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("LastLoginDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastLoginIP")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LoginName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PwdHash")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("BookLinks.Repositories.Models.Link", b =>
