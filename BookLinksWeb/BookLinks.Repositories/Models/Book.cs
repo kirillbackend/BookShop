@@ -28,6 +28,7 @@ namespace BookLinks.Repositories.Models
 
         public string ImageContent { get; set; }
 
+        [Display(Name = "Обложка")]
         public string OriginalFileName { get; set; }
 
         public List<Link> Links { get; set; }

@@ -1,0 +1,88 @@
+﻿@model List<BookLinks.Repositories.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<form asp-controller="Book" asp-action="Index">
+    <div class="row g-3 mb-4">
+        <div class="d-grid gap-2 col-1">
+            <a asp-action="Create" class="btn btn-success rounded-pill">+</a>
+        </div>
+        <div class="col-md-8">
+            <input type="text" name="searchString" placeholder="Поиск" class="form-control rounded-pill">
+        </div>
+        <div class="col-md-1">
+            <select name="option" class="form-select rounded-pill">
+                @foreach (var item in Enum.GetValues(typeof(BookOptiosEnum))
+                .Cast<BookOptiosEnum>()
+                .Select(e => new { Name = e.ToString() }))
+                {
+                    <option value="@item.Name"> @item.Name </option>
+                }
+            </select>
+        </div>
+        <div class="d-grid gap-2 col-2">
+            <input type="submit" value="Поиск" class="btn btn-success rounded-pill" />
+        </div>
+    </div>
+</form>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Released)
+            </th>
+            <th>
+                <label>Дайствия</label>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="col-md-4">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="col-md-2">
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td class="col-md-1">
+                    @if (item.Rating == 0)
+                    {
+                        <label>☆☆☆☆☆</label>
+                    }
+                    else
+                    {
+                        <label>
+                            @for (int i = 0; i < item.Rating; i++)
+                            {
+                                <a>★</a>
+                            }
+                        </label>
+                    }
+                </td>
+                <td class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.Released)
+                </td>
+                <td class="col-md-3">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success rounded-pill">Изменить</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success rounded-pill">Информация</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger rounded-pill">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

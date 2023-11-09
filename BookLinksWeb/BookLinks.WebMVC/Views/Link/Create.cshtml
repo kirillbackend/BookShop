@@ -1,0 +1,42 @@
+﻿@model BookLinks.Repositories.Models.Link
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Создание.</h1>
+
+<div class="row">
+    <div class="form-floating mb-3">
+        @using (Html.BeginForm("Create", "Link", FormMethod.Post))
+        {
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.BookId" class="control-label mt-2"></label>
+                <select asp-for="@Model.BookId" class="form-select">
+                    @foreach (var item in ViewBag.Books)
+                    {
+                        <option value="@item.Id">@item.Id - @item.Name - @item.Author</option>
+                    }
+                </select>
+                <span asp-validation-for="@Model.BookId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Path" class="control-label mt-2"></label>
+                <input asp-for="@Model.Path" class="form-control mt-2" />
+                <span asp-validation-for="@Model.Path" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-success mt-4 mb-2 rounded-pill" />
+                <a asp-action="Index" class="btn btn-danger mt-4 mb-2 rounded-pill">Назад</a>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

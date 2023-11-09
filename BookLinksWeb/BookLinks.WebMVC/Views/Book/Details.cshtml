@@ -1,0 +1,69 @@
+﻿@model BookLinks.Repositories.Models.Book
+@{
+    ViewData["Title"] = "MyDetails";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h2>Книга - @Html.DisplayFor(model => model.Id)</h2>
+            </th>
+            <th>
+                <h4>
+                    @Html.DisplayFor(model => model.Name)
+                </h4>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @if (@Model.ImageContent != "")
+                {
+                    <img src="@Model.ImageContent" width="280" height="390" />
+                }
+                else
+                {
+                    <img src="/img/notimage.jpg" width="280" height="390" />
+                }
+            </td>
+            <td>
+                <div class="col-md-12">
+                    <div>
+                        <h4>
+                            <label> Рэйтинг </label>
+                            @Html.DisplayFor(model => model.Rating)
+                            <label> ★ </label>
+                        </h4>
+                    </div>
+                    <div>
+                        <h4>
+                            <label> Дата релиза </label>
+                            @Html.DisplayFor(model => model.Released)
+                        </h4>
+                    </div>
+                    <div>
+                        <h4>
+                            <label> Автор </label>
+                            @Html.DisplayFor(model => model.Author)
+                        </h4>
+                    </div>
+                    <div>
+                        <h5>Описание</h5>
+                        @Html.DisplayFor(model => model.Description)
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div>
+    <div class="mt-2">
+        @foreach (var item in Model.Links)
+        {
+            <a href="@item.Path" class="btn btn-success rounded-pill mt-2" target=" _blank"> Ссылка на книгу № @item.Id</a>
+        }
+    </div>
+</div>
