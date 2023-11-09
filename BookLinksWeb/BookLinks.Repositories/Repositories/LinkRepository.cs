@@ -15,7 +15,7 @@ namespace BookLinks.Repositories.Repositories
 
         public async Task<List<Link>> GetLinksAsync()
         {
-            var link = await _context.Links.ToListAsync();
+            var link = await _context.Links.Include(b => b.Book).ToListAsync();
             return link;
         }
 
@@ -23,7 +23,7 @@ namespace BookLinks.Repositories.Repositories
         {
             if (id != null)
             {
-                var links = await _context.Links.FirstAsync(i => i.Id == id);
+                var links = await _context.Links.Include(b => b.Book).FirstAsync(i => i.Id == id);
                 return links;
             }
             else

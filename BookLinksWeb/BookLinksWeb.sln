@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLinks.Repositories", "B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLinks.Web", "BookLinks.Web\BookLinks.Web.csproj", "{D470091C-E88E-447A-8FF9-2B9C2E1E37DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLinks.WebMVC", "BookLinks.WebMVC\BookLinks.WebMVC.csproj", "{3B6853E3-DD7C-464F-85ED-CA8C125F704D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{D470091C-E88E-447A-8FF9-2B9C2E1E37DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D470091C-E88E-447A-8FF9-2B9C2E1E37DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D470091C-E88E-447A-8FF9-2B9C2E1E37DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B6853E3-DD7C-464F-85ED-CA8C125F704D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B6853E3-DD7C-464F-85ED-CA8C125F704D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B6853E3-DD7C-464F-85ED-CA8C125F704D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B6853E3-DD7C-464F-85ED-CA8C125F704D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

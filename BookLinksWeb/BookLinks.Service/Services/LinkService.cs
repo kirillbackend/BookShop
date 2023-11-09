@@ -1,4 +1,5 @@
-﻿using BookLinks.Repositories.Models;
+﻿using BookLinks.Common.Enums;
+using BookLinks.Repositories.Models;
 using BookLinks.Repositories.Repositories.Interface;
 
 namespace BookLinks.Repositories.Repositories
@@ -73,6 +74,34 @@ namespace BookLinks.Repositories.Repositories
             else
             {
                 throw new ArgumentNullException(nameof(link));
+            }
+        }
+
+        public async Task<IList<Link>> GetFilterLink(string? searchString, List<Link> allLink, LinkOptiosEnum option)
+        {
+            int parsedId = -1;
+            if ((option == LinkOptiosEnum.id && !int.TryParse(searchString, out parsedId))
+                || (option == LinkOptiosEnum.BookId && !int.TryParse(searchString, out parsedId)))
+            {
+                throw new ArgumentException(nameof(option));
+            }
+            else
+            {
+                var books = new List<Link>();
+                var filters = new Dictionary<LinkOptiosEnum, Func<IList<Link>, IList<Link>>>()
+                {
+                    {LinkOptiosEnum.id, (list) => list = list.Where(l => l.Id == parsedId).ToList()},
+                    {LinkOptiosEnum.Name, (list) => list = list.Where(l => l.Book.Name.ToLower().Contains(searchString.ToLower())).ToList()},
+                    {LinkOptiosEnum.Author, (list) => list = list.Where(l => l.Book.Author.ToLower().Contains(searchString.ToLower())).ToList()},
+                    {LinkOptiosEnum.BookId, (list) => list = list.Where(l => l.BookId == parsedId).ToList()}
+                };
+
+                if (filters.ContainsKey(option))
+                {
+                    books = filters[option](allLink).ToList();
+                }
+
+                return books;
             }
         }
     }

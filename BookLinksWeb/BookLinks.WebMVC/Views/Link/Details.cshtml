@@ -1,0 +1,30 @@
+﻿@model BookLinks.Repositories.Models.Link
+@{
+    ViewData["Title"] = "MyDetails";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h2>Ссылка № @Html.DisplayFor(model => model.Id) для книги @Html.DisplayFor(model => model.Book.Name)</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <div class="col-md-12">
+                    <div>
+                        <h4>
+                            <a href="@Model.Path" class="btn btn-success rounded-pill mt-2" target=" _blank">@Model.Path</a>
+                        </h4>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index" class="btn btn-danger mt-4 mb-2 rounded-pill">Назад</a>
+</div>

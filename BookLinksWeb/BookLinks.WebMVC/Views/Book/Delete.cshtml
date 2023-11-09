@@ -1,0 +1,68 @@
+﻿@model BookLinks.Repositories.Models.Book
+@{
+    ViewData["Title"] = "MyDelete";
+}
+<div class="row">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    <h2>Книга - @Html.DisplayFor(model => model.Id)</h2>
+                </th>
+                <th>
+                    <h2>
+                        Вы уверены что хотите удалить книгу "@Html.DisplayFor(m => m.Name)"?
+                    </h2>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @if (@Model.ImageContent != "")
+                    {
+                        <img src="@Model.ImageContent" width="280" height="390" />
+                    }
+                    else
+                    {
+                        <img src="/img/notimage.jpg" width="280" height="390" />
+                    }
+                </td>
+                <td>
+                    <div class="col-md-12">
+                        <div>
+                            <h4>
+                                <label> Рэйтинг </label>
+                                @Html.DisplayFor(model => model.Rating)
+                                <label> ★ </label>
+                            </h4>
+                        </div>
+                        <div>
+                            <h4>
+                                <label> Дата релиза </label>
+                                @Html.DisplayFor(model => model.Released)
+                            </h4>
+                        </div>
+                        <div>
+                            <h4>
+                                <label> Автор </label>
+                                @Html.DisplayFor(model => model.Author)
+                            </h4>
+                        </div>
+                        <div>
+                            <h5>Описание</h5>
+                            @Html.DisplayFor(model => model.Description)
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form method="post">
+        <input type="hidden" asp-for="@Model.Id" />
+        <input type="submit" value="Да" class="btn btn-success mt-4 mb-2 rounded-pill" />
+        <a asp-action="Index" class="btn btn-danger mt-4 mb-2 rounded-pill">Нет</a>
+    </form>
+</div>
+
