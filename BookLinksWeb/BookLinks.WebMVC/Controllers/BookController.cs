@@ -16,7 +16,7 @@ namespace BookLinks.WebMVC.Controllers
             _bookService = bookService;
         }
 
-        [HttpGet]
+        
         public async Task<IActionResult> Index(string? searchString, BookOptiosEnum option)
         {
             var allBook = await _bookService.GetBooksAsync();
