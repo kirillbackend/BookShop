@@ -42,5 +42,31 @@ namespace BookLinks.Repositories.Repositories
             await _dataContext.Users.AddAsync(user);
             await _dataContext.SaveChangesAsync();
         }
+
+        public async Task<User> GetUserByIdAsync(int? id)
+        {
+            var user = _dataContext.Users.FirstOrDefault(x => x.Id == id);
+            return user;
+        }
+
+        public async Task UpdateUserAsync(User user)
+        {
+            _dataContext.Users.Update(user);
+            await _dataContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteUserAsync(int? id)
+        {
+            var user = await _dataContext.Users.FirstOrDefaultAsync(i => i.Id == id);
+            if (user != null)
+            {
+                _dataContext.Users.Remove(user);
+                await _dataContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+        }
     }
 }

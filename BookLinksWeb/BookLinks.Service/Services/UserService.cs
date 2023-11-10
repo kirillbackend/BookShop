@@ -64,5 +64,23 @@ namespace BookLinks.Service.Services
                 return books;
             }
         }
+
+        public async Task<UserDto> GetUserByIdAsync(int? id)
+        {
+            var user = await _userRepository.GetUserByIdAsync(id);
+            var userDto = _mapper.Map<UserDto>(user);
+            return userDto;
+        }
+
+        public async Task UpdateUserAsync(UserDto userDto)
+        {
+            var user = _mapper.Map<User>(userDto);
+            await _userRepository.UpdateUserAsync(user);
+        }
+
+        public async Task DeleteUserAsync(int? id)
+        {
+            await _userRepository.DeleteUserAsync(id);
+        }
     }
 }

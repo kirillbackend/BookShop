@@ -56,6 +56,5 @@ namespace BookLinks.Service.Services
             }
             return sb.ToString();
         }
-
     }
 }

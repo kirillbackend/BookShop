@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using BookLinks.Common.Enums;
+using BookLinks.Repositories.Models;
 using BookLinks.Service.Models;
+using BookLinks.Service.Services;
 using BookLinks.Service.Services.Interface;
 using BookLinks.WebMVC.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -55,6 +57,67 @@ namespace BookLinks.WebMVC.Controllers
             var userDto = _mapper.Map<UserDto>(user);
             await _userService.AddUserAsync(userDto);
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            else
+            {
+                var userDto = await _userService.GetUserByIdAsync(id);
+                var user = _mapper.Map<UserModel>(userDto);
+                return View(user);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(UserModel user)
+        {
+            user.Update = DateTime.Now;
+            var userDto = _mapper.Map<UserDto>(user);
+            await _userService.UpdateUserAsync(userDto);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var userDto = await _userService.GetUserByIdAsync(id);
+                var user = _mapper.Map<UserModel>(userDto);
+                return View(user);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userDto = await _userService.GetUserByIdAsync(id);
+            var user = _mapper.Map<UserModel>(userDto);
+            return View(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                await _userService.DeleteUserAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
         }
     }
 }

@@ -37,7 +37,6 @@ namespace BookLinks.WebMVC.Models
 
         public string? LastLoginIP { get; set; }
 
-        [StringLength(60, MinimumLength = 3)]
         [Display(Name = "Роль")]
         public UserRoleEnum Role { get; set; }
     }
