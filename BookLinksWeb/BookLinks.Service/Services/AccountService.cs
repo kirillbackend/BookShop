@@ -19,9 +19,6 @@ namespace BookLinks.Service.Services
             {
                 var pwdHash = this.GetMD5Hash(password);
                 var userDbModel = await _userRepository.GetUserByLoginPwdHash(loginName, pwdHash);
-
-                Thread.Sleep(3000);
-
                 return userDbModel;
             }
             catch (Exception)
