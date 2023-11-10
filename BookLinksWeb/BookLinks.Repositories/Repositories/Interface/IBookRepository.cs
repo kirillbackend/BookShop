@@ -6,7 +6,7 @@ namespace BookLinks.Repositories.Repositories.Interface
     {
         Task<List<Book>> GetBooksAsync();
         Task<Book> GetBookByIdAsync(int? id);
-        Task<Book> AddBookAsync(Book book);
+        Task AddBookAsync(Book book);
         Task DeleteBookAsync(int? id);
         Task UpdateBookAsync(Book book);
     }

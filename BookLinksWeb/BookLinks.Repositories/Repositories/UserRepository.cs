@@ -30,5 +30,17 @@ namespace BookLinks.Repositories.Repositories
             _dataContext.Users.Update(user);
             await _dataContext.SaveChangesAsync();
         }
+
+        public async Task<List<User>> GerUsersAsync()
+        {
+            var users = await _dataContext.Users.ToListAsync();
+            return users;
+        }
+
+        public async Task AddUserAsync(User user)
+        {
+            await _dataContext.Users.AddAsync(user);
+            await _dataContext.SaveChangesAsync();
+        }
     }
 }
