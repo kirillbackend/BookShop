@@ -77,23 +77,23 @@ namespace BookLinks.Repositories.Repositories
             }
         }
 
-        public async Task<IList<Link>> GetFilterLink(string? searchString, List<Link> allLink, LinkOptiosEnum option)
+        public async Task<IList<Link>> GetFilterLink(string? searchString, List<Link> allLink, LinkOptionsEnum option)
         {
             int parsedId = -1;
-            if ((option == LinkOptiosEnum.id && !int.TryParse(searchString, out parsedId))
-                || (option == LinkOptiosEnum.BookId && !int.TryParse(searchString, out parsedId)))
+            if ((option == LinkOptionsEnum.id && !int.TryParse(searchString, out parsedId))
+                || (option == LinkOptionsEnum.BookId && !int.TryParse(searchString, out parsedId)))
             {
                 throw new ArgumentException(nameof(option));
             }
             else
             {
                 var books = new List<Link>();
-                var filters = new Dictionary<LinkOptiosEnum, Func<IList<Link>, IList<Link>>>()
+                var filters = new Dictionary<LinkOptionsEnum, Func<IList<Link>, IList<Link>>>()
                 {
-                    {LinkOptiosEnum.id, (list) => list = list.Where(l => l.Id == parsedId).ToList()},
-                    {LinkOptiosEnum.Name, (list) => list = list.Where(l => l.Book.Name.ToLower().Contains(searchString.ToLower())).ToList()},
-                    {LinkOptiosEnum.Author, (list) => list = list.Where(l => l.Book.Author.ToLower().Contains(searchString.ToLower())).ToList()},
-                    {LinkOptiosEnum.BookId, (list) => list = list.Where(l => l.BookId == parsedId).ToList()}
+                    {LinkOptionsEnum.id, (list) => list = list.Where(l => l.Id == parsedId).ToList()},
+                    {LinkOptionsEnum.Name, (list) => list = list.Where(l => l.Book.Name.ToLower().Contains(searchString.ToLower())).ToList()},
+                    {LinkOptionsEnum.Author, (list) => list = list.Where(l => l.Book.Author.ToLower().Contains(searchString.ToLower())).ToList()},
+                    {LinkOptionsEnum.BookId, (list) => list = list.Where(l => l.BookId == parsedId).ToList()}
                 };
 
                 if (filters.ContainsKey(option))

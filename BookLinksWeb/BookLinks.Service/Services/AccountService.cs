@@ -45,7 +45,7 @@ namespace BookLinks.Service.Services
             }
         }
 
-        private string GetMD5Hash(string password)
+        public string GetMD5Hash(string password)
         {
             var md5 = System.Security.Cryptography.MD5.Create();
             var hash = md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
@@ -56,6 +56,5 @@ namespace BookLinks.Service.Services
             }
             return sb.ToString();
         }
-
     }
 }

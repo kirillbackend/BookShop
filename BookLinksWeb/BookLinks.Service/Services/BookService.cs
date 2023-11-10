@@ -44,14 +44,13 @@ namespace BookLinks.Service.Services
             }
         }
 
-        public async Task<Book> AddBookAsync(Book book)
+        public async Task AddBookAsync(Book book)
         {
             if (book != null)
             {
                 await _fileService.ProcessPhoto(book);
                 book.Created = DateTime.Now;
                 await _repository.AddBookAsync(book);
-                return book;
             }
             else
             {

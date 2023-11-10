@@ -91,10 +91,10 @@ namespace BookLinks.Repositories.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
+                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("BrowserId")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Created")
@@ -102,6 +102,7 @@ namespace BookLinks.Repositories.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
+                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsBanned")
@@ -111,23 +112,26 @@ namespace BookLinks.Repositories.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastLoginIP")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LoginName")
                         .IsRequired()
+                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Phone")
                         .IsRequired()
+                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PwdHash")
                         .IsRequired()
+                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Role")

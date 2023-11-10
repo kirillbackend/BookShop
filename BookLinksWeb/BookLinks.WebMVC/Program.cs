@@ -8,7 +8,7 @@ using FS.Services.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Identity;
+using BookLinks.Service.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +16,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option => option.LoginPath = "/login");
 builder.Services.AddAuthorization();
 builder.Services.AddControllersWithViews().AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IBookService, BookService>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddTransient<IAccountService, AccountService>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IBookRepository, BookRepository>();

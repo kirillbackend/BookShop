@@ -43,7 +43,7 @@ namespace BookLinks.WebMVC.Controllers
             {
                 var user = await _accountService.GetLoginnedUser(model.Name, model.Password);
 
-                if (user != null && !user.IsBanned && user.Role == UserRoleEnum.Admin)
+                if (user != null && !user.IsBanned)
                 {
                     await Authenticate(user);
 
@@ -52,6 +52,7 @@ namespace BookLinks.WebMVC.Controllers
                     if (!string.IsNullOrWhiteSpace(model.ReturnURL)) return Redirect(model.ReturnURL);
                     return RedirectToAction("Index", "Book");
                 }
+
                 // TODO remember ip browserId and ban? after 3 attempts
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }

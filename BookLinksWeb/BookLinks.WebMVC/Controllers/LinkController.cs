@@ -20,7 +20,7 @@ namespace BookLinks.WebMVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult>Index(string? searchString, LinkOptiosEnum option)
+        public async Task<IActionResult>Index(string? searchString, LinkOptionsEnum option)
         {
             var allLinks = await _linkService.GetLinksAsync();
             if (!string.IsNullOrEmpty(searchString))

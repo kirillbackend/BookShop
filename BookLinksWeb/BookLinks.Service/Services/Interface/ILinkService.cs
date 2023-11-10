@@ -10,6 +10,6 @@ namespace BookLinks.Repositories.Repositories.Interface
         Task<Link> AddLinkAsync(Link book);
         Task DeleteLinkAsync(int? id);
         Task UpdateLinkAsync(Link book);
-        Task<IList<Link>> GetFilterLink(string? searchString, List<Link> allLink, LinkOptiosEnum option);
+        Task<IList<Link>> GetFilterLink(string? searchString, List<Link> allLink, LinkOptionsEnum option);
     }
 }

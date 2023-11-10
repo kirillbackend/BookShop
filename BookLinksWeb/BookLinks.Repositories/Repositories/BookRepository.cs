@@ -32,11 +32,10 @@ namespace BookLinks.Repositories.Repositories
             }
         }
 
-        public async Task<Book> AddBookAsync(Book book)
+        public async Task AddBookAsync(Book book)
         {
             await _context.Books.AddAsync(book);
             await _context.SaveChangesAsync();
-            return book;
         }
 
         public async Task DeleteBookAsync(int? id)
