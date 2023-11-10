@@ -19,7 +19,7 @@ namespace BookLinks.Repositories.Models
 
         [DataType(DataType.Date)]
 
-        [Display(Name = "Дата выхода")]
+        [Display(Name = "Релиз")]
         public DateTime Released { get; set; }
 
         [Display(Name = "Рэйтинг")]
