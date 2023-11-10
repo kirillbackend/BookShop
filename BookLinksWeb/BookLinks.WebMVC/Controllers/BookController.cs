@@ -1,10 +1,12 @@
 ﻿using BookLinks.Common.Enums;
 using BookLinks.Repositories.Models;
 using BookLinks.Service.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookLinks.WebMVC.Controllers
 {
+    [Authorize]
     public class BookController : Controller
     {
         private readonly ILogger<BookController> _logger;
@@ -52,6 +54,7 @@ namespace BookLinks.WebMVC.Controllers
             return  RedirectToAction(nameof(Index));
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {

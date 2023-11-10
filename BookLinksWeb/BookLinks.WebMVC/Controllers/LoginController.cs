@@ -23,6 +23,10 @@ namespace BookLinks.WebMVC.Controllers
         [HttpGet]
         public IActionResult Index(string returnURL)
         {
+            if (returnURL == null)
+            {
+                returnURL = "/";
+            }
             ViewBag.returnURL = returnURL;
             return View();
         }
@@ -41,7 +45,7 @@ namespace BookLinks.WebMVC.Controllers
 
                 if (user != null && !user.IsBanned && user.Role == UserRoleEnum.Admin)
                 {
-                    await Authenticate(model.Name);
+                    await Authenticate(user);
 
                     await _accountService.UserLogin(user.Id, ip, isSendNotificationIfLoginnedAdmin: true);
 
@@ -57,14 +61,15 @@ namespace BookLinks.WebMVC.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index", "Home");
         }
 
-        private async Task Authenticate(string userName)
+        private async Task Authenticate(User user)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Name),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.ToString())
             };
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));

@@ -2,10 +2,12 @@
 using BookLinks.Repositories.Models;
 using BookLinks.Repositories.Repositories.Interface;
 using BookLinks.Service.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookLinks.WebMVC.Controllers
 {
+    [Authorize]
     public class LinkController : Controller
     {
         private readonly ILinkService _linkService;
