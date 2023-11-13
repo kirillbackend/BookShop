@@ -1,9 +1,14 @@
-﻿@model List<BookLinks.Repositories.Models.Link>
+﻿@model List<BookLinks.WebMVC.Models.LinkModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Ссылки";
 }
 
+<div class="container-fluid">
+    <h1 class="text-center">
+        @ViewData["Title"]
+    </h1>
+</div>
 
 <form asp-controller="Link" asp-action="Index">
     <div class="row g-3 mb-4">

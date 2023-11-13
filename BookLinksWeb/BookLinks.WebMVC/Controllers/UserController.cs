@@ -56,7 +56,7 @@ namespace BookLinks.WebMVC.Controllers
             user.PwdHash = _accountService.GetMD5Hash(user.PwdHash);
             var userDto = _mapper.Map<UserDto>(user);
             await _userService.AddUserAsync(userDto);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Login");
         }
 
         [HttpGet]

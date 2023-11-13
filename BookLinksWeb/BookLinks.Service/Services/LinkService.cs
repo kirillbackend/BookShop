@@ -1,24 +1,29 @@
-﻿using BookLinks.Common.Enums;
+﻿using AutoMapper;
+using BookLinks.Common.Enums;
 using BookLinks.Repositories.Models;
 using BookLinks.Repositories.Repositories.Interface;
+using BookLinks.Service.Models;
 
-namespace BookLinks.Repositories.Repositories
+namespace BookLinks.Service.Services
 {
     public class LinkService : ILinkService
     {
         private readonly ILinkRepository _repository;
+        private readonly IMapper _mapper;
 
-        public LinkService(ILinkRepository repository)
+        public LinkService(ILinkRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
-        public async Task<List<Link>> GetLinksAsync()
+        public async Task<List<LinkDto>> GetLinksAsync()
         {
             try
             {
                 var links = await _repository.GetLinksAsync();
-                return links;
+                var linksDto = _mapper.Map<List<LinkDto>>(links);
+                return linksDto;
             }
             catch (Exception)
             {
@@ -27,12 +32,13 @@ namespace BookLinks.Repositories.Repositories
             }
         }
 
-        public async Task<Link> GetLinkByIdAsync(int? id)
+        public async Task<LinkDto> GetLinkByIdAsync(int? id)
         {
             if (id != null)
             {
                 var link = await _repository.GetLinkByIdAsync(id);
-                return link;
+                var linkDto = _mapper.Map<LinkDto>(link);
+                return linkDto;
             }
             else
             {
@@ -40,16 +46,16 @@ namespace BookLinks.Repositories.Repositories
             }
         }
 
-        public async Task<Link> AddLinkAsync(Link link)
+        public async Task AddLinkAsync(LinkDto linkDto)
         {
-            if (link != null)
+            if (linkDto != null)
             {
+                var link = _mapper.Map<Link>(linkDto);
                 await _repository.AddLinkAsync(link);
-                return link;
             }
             else
             {
-                throw new ArgumentException(nameof(link));
+                throw new ArgumentException(nameof(linkDto));
             }
         }
 
@@ -65,19 +71,20 @@ namespace BookLinks.Repositories.Repositories
             }
         }
 
-        public async Task UpdateLinkAsync(Link link)
+        public async Task UpdateLinkAsync(LinkDto linkDto)
         {
-            if (link != null)
+            if (linkDto != null)
             {
+                var link = _mapper.Map<Link>(linkDto);
                 await _repository.UpdateLinkAsync(link);
             }
             else
             {
-                throw new ArgumentNullException(nameof(link));
+                throw new ArgumentNullException(nameof(linkDto));
             }
         }
 
-        public async Task<IList<Link>> GetFilterLink(string? searchString, List<Link> allLink, LinkOptionsEnum option)
+        public async Task<IList<LinkDto>> GetFilterLink(string? searchString, List<LinkDto> allLink, LinkOptionsEnum option)
         {
             int parsedId = -1;
             if ((option == LinkOptionsEnum.id && !int.TryParse(searchString, out parsedId))
@@ -87,8 +94,8 @@ namespace BookLinks.Repositories.Repositories
             }
             else
             {
-                var books = new List<Link>();
-                var filters = new Dictionary<LinkOptionsEnum, Func<IList<Link>, IList<Link>>>()
+                var books = new List<LinkDto>();
+                var filters = new Dictionary<LinkOptionsEnum, Func<IList<LinkDto>, IList<LinkDto>>>()
                 {
                     {LinkOptionsEnum.id, (list) => list = list.Where(l => l.Id == parsedId).ToList()},
                     {LinkOptionsEnum.Name, (list) => list = list.Where(l => l.Book.Name.ToLower().Contains(searchString.ToLower())).ToList()},

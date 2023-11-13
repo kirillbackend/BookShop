@@ -1,6 +1,8 @@
-﻿using BookLinks.Common.Enums;
+﻿using AutoMapper;
+using BookLinks.Common.Enums;
 using BookLinks.Repositories.Models;
 using BookLinks.Repositories.Repositories.Interface;
+using BookLinks.Service.Models;
 using BookLinks.Service.Services.Interface;
 using FS.Services.Services.Contracts;
 
@@ -10,19 +12,22 @@ namespace BookLinks.Service.Services
     {
         private readonly IBookRepository _repository;
         private readonly IFileService _fileService;
+        private readonly IMapper _mapper;
 
-        public BookService(IBookRepository repository, IFileService fileService)
+        public BookService(IBookRepository repository, IFileService fileService, IMapper mapper)
         {
             _repository = repository;
             _fileService = fileService;
+            _mapper = mapper;
         }
 
-        public async Task<List<Book>> GetBooksAsync()
+        public async Task<List<BookDto>> GetBooksAsync()
         {
             try
             {
                 var books = await _repository.GetBooksAsync();
-                return books;
+                var booksDto = _mapper.Map<List<BookDto>>(books);
+                return booksDto;
             }
             catch (Exception)
             {
@@ -31,12 +36,13 @@ namespace BookLinks.Service.Services
             }
         }
 
-        public async Task<Book> GetBookByIdAsync(int? id)
+        public async Task<BookDto> GetBookByIdAsync(int? id)
         {
             if (id != null)
             {
-                var books = await _repository.GetBookByIdAsync(id);
-                return books;
+                var book = await _repository.GetBookByIdAsync(id);
+                var bookDto = _mapper.Map<BookDto>(book);
+                return bookDto;
             }
             else
             {
@@ -44,17 +50,18 @@ namespace BookLinks.Service.Services
             }
         }
 
-        public async Task AddBookAsync(Book book)
+        public async Task AddBookAsync(BookDto bookDto)
         {
-            if (book != null)
+            if (bookDto != null)
             {
+                var book = _mapper.Map<Book>(bookDto);
                 await _fileService.ProcessPhoto(book);
                 book.Created = DateTime.Now;
                 await _repository.AddBookAsync(book);
             }
             else
             {
-                throw new ArgumentException(nameof(book));
+                throw new ArgumentException(nameof(bookDto));
             }
         }
 
@@ -70,21 +77,22 @@ namespace BookLinks.Service.Services
             }
         }
 
-        public async Task UpdateBookAsync(Book book)
+        public async Task UpdateBookAsync(BookDto bookDto)
         {
-            if (book != null)
+            if (bookDto != null)
             {
+                var book = _mapper.Map<Book>(bookDto);
                 await _fileService.ProcessPhoto(book);
                 book.Update = DateTime.Now;
                 await _repository.UpdateBookAsync(book);
             }
             else
             {
-                throw new ArgumentNullException(nameof(book));
+                throw new ArgumentNullException(nameof(bookDto));
             }
         }
 
-        public async Task<IList<Book>> GetFilterBook(string? SearchString, List<Book> allBooks, BookOptiosEnum Option)
+        public async Task<IList<BookDto>> GetFilterBook(string? SearchString, List<BookDto> allBooks, BookOptiosEnum Option)
         {
             int parsedId = -1;
             if ((Option == BookOptiosEnum.id && !int.TryParse(SearchString, out parsedId))
@@ -94,8 +102,8 @@ namespace BookLinks.Service.Services
             }
             else
             {
-                var books = new List<Book>();
-                var filters = new Dictionary<BookOptiosEnum, Func<IList<Book>, IList<Book>>>()
+                var books = new List<BookDto>();
+                var filters = new Dictionary<BookOptiosEnum, Func<IList<BookDto>, IList<BookDto>>>()
                 {
                     {BookOptiosEnum.id, (list) => list = list.Where(l => l.Id == parsedId).ToList()},
                     {BookOptiosEnum.Name, (list) => list = list.Where(l => l.Name.ToLower().Contains(SearchString.ToLower())).ToList()},

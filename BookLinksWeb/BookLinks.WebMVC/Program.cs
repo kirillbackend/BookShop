@@ -8,10 +8,8 @@ using FS.Services.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using BookLinks.Service.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option => option.LoginPath = "/login");
 builder.Services.AddAuthorization();

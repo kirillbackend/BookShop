@@ -1,6 +1,8 @@
-﻿using BookLinks.Common.Enums;
-using BookLinks.Repositories.Models;
+﻿using AutoMapper;
+using BookLinks.Common.Enums;
+using BookLinks.Service.Models;
 using BookLinks.Service.Services.Interface;
+using BookLinks.WebMVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,24 +13,30 @@ namespace BookLinks.WebMVC.Controllers
     {
         private readonly ILogger<BookController> _logger;
         private readonly IBookService _bookService;
+        private readonly IMapper _mapper;
 
-        public BookController(ILogger<BookController> logger, IBookService bookService)
+        public BookController(ILogger<BookController> logger, IBookService bookService, IMapper mapper)
         {
             _logger = logger;
             _bookService = bookService;
+            _mapper = mapper;
         }
 
         
         public async Task<IActionResult> Index(string? searchString, BookOptiosEnum option)
         {
-            var allBook = await _bookService.GetBooksAsync();
+            var allBooksDto = await _bookService.GetBooksAsync();
             if (!string.IsNullOrEmpty(searchString))
             {
-                var result = await _bookService.GetFilterBook(searchString, allBook, option);
-                return View(result);
+                var result = await _bookService.GetFilterBook(searchString, allBooksDto, option);
+                var filterBooks = _mapper.Map<List<BookModel>>(result);
+                return View(filterBooks);
             }
             else
-                return View(allBook);
+            {
+                var allBooks = _mapper.Map<List<BookModel>>(allBooksDto);
+                return View(allBooks);
+            }
         }
 
         [HttpGet]
@@ -39,18 +47,20 @@ namespace BookLinks.WebMVC.Controllers
                 return NotFound();
             }
 
-            var book = await _bookService.GetBookByIdAsync(id);
-            if (book == null)
+            var bookDto = await _bookService.GetBookByIdAsync(id);
+            if (bookDto == null)
             {
                 return NotFound();
             }
+            var book = _mapper.Map<BookModel>(bookDto);
             return View(book);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Book book)
+        public async Task<IActionResult> Edit(BookModel book)
         {
-            await _bookService.UpdateBookAsync(book);
+            var bookDto = _mapper.Map<BookDto>(book);
+            await _bookService.UpdateBookAsync(bookDto);
             return  RedirectToAction(nameof(Index));
         }
 
@@ -64,7 +74,8 @@ namespace BookLinks.WebMVC.Controllers
             }
             else
             {
-                var book = await _bookService.GetBookByIdAsync(id);
+                var bookDto = await _bookService.GetBookByIdAsync(id);
+                var book = _mapper.Map<BookModel>(bookDto);
                 return View(book);
             }
         }
@@ -72,7 +83,8 @@ namespace BookLinks.WebMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var book = await _bookService.GetBookByIdAsync(id);
+            var bookDto = await _bookService.GetBookByIdAsync(id);
+            var book = _mapper.Map<BookModel>(bookDto);
             return View(book);
         }
 
@@ -97,9 +109,10 @@ namespace BookLinks.WebMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Book book)
+        public async Task<IActionResult> Create(BookModel book)
         {
-            await _bookService.AddBookAsync(book);
+            var bookDto = _mapper.Map<BookDto>(book);
+            await _bookService.AddBookAsync(bookDto);
             return RedirectToAction(nameof(Index));
         }
     }

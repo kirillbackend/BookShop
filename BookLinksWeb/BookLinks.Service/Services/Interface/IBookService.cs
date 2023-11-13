@@ -1,15 +1,15 @@
 ﻿using BookLinks.Common.Enums;
-using BookLinks.Repositories.Models;
+using BookLinks.Service.Models;
 
 namespace BookLinks.Service.Services.Interface
 {
     public interface IBookService
     {
-        Task<List<Book>> GetBooksAsync();
-        Task<Book> GetBookByIdAsync(int? id);
-        Task AddBookAsync(Book book);
+        Task<List<BookDto>> GetBooksAsync();
+        Task<BookDto> GetBookByIdAsync(int? id);
+        Task AddBookAsync(BookDto book);
         Task DeleteBookAsync(int? id);
-        Task UpdateBookAsync(Book book);
-        Task<IList<Book>> GetFilterBook(string? SearchString, List<Book> allBooks, BookOptiosEnum Option);
+        Task UpdateBookAsync(BookDto book);
+        Task<IList<BookDto>> GetFilterBook(string? SearchString, List<BookDto> allBooks, BookOptiosEnum Option);
     }
 }
