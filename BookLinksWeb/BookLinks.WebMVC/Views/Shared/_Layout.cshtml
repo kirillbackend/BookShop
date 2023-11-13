@@ -51,19 +51,37 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="nav-item">
-                            @if (Context.User.Identity.IsAuthenticated)
-                            {
+                        @if (Context.User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <div class="mt-1">
+                                    <a class="navbar-brand">
+                                        @User.Identity.Name 
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <div>
+                                    <a class="navbar-brand" asp-area="" asp-controller="Basket" asp-action="Index">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="35" fill="currentColor" class="bi bi-cart2" viewBox="0 0 15 15">
+                                            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
                                 <div>
                                     <a class="navbar-brand" asp-area="" asp-controller="Login" asp-action="Logout">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="35" fill="currentColor" class="bi bi-door-closed" viewBox="0 0 15 15">
                                             <path d="M12 1a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2a1 1 0 0 1 1-1h8zm-2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                                         </svg>
                                     </a>
-                                </div>  
-                            }
-                            else
-                            {
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
                                 <div>
                                     <a class="navbar-brand" asp-area="" asp-controller="Login" asp-action="Index">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="35" fill="currentColor" class="bi bi-door-open" viewBox="0 0 15 15">
@@ -72,8 +90,8 @@
                                         </svg>
                                     </a>
                                 </div>
-                            }
-                        </li>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -87,7 +105,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - BookLinks.WebMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - BookLinks - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

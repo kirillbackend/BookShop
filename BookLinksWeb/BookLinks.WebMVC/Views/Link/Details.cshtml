@@ -1,7 +1,13 @@
-﻿@model BookLinks.Repositories.Models.Link
+﻿@model BookLinks.WebMVC.Models.LinkModel
 @{
-    ViewData["Title"] = "MyDetails";
+    ViewData["Title"] = "Информация о ссылке";
 }
+
+<div class="container-fluid">
+    <h1 class="text-center">
+        @ViewData["Title"]
+    </h1>
+</div>
 
 <table class="table">
     <thead>

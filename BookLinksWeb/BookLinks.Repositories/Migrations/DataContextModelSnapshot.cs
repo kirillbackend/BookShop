@@ -25,7 +25,6 @@ namespace BookLinks.Repositories.Migrations
 
                     b.Property<string>("Author")
                         .IsRequired()
-                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Created")
@@ -33,7 +32,6 @@ namespace BookLinks.Repositories.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(10000)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ImageContent")
@@ -42,7 +40,6 @@ namespace BookLinks.Repositories.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("OriginalFileName")
@@ -72,8 +69,14 @@ namespace BookLinks.Repositories.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Path")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Update")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

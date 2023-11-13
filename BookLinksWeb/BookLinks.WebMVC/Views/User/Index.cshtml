@@ -1,9 +1,15 @@
 ﻿@model List<BookLinks.WebMVC.Models.UserModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Пользователи";
 }
 
+
+<div class="container-fluid">
+    <h1 class="text-center">
+        @ViewData["Title"]
+    </h1>
+</div>
 
 <form asp-controller="User" asp-action="Index">
     <div class="row g-3 mb-4">

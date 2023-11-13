@@ -1,9 +1,14 @@
-﻿@model List<BookLinks.Repositories.Models.Book>
+﻿@model List<BookLinks.WebMVC.Models.BookModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Книги";
 }
 
+<div class="container-fluid">
+    <h1 class="text-center">
+        @ViewData["Title"]
+    </h1>
+</div>
 
 <form asp-controller="Book" asp-action="Index">
     <div class="row g-3 mb-4">
@@ -43,6 +48,7 @@
     <thead>
         <tr align="center">
             <th>
+                @Html.DisplayNameFor(model => model[0].Id) -
                 @Html.DisplayNameFor(model => model[0].Name)
             </th>
             <th>
@@ -63,7 +69,8 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td class="col-md-4">
+                <td class="col-md-3">
+                    @Html.DisplayFor(modelItem => item.Id) - 
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td class="col-md-2">

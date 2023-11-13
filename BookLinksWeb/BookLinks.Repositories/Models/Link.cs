@@ -1,10 +1,8 @@
 ﻿
 namespace BookLinks.Repositories.Models
 {
-    public class Link
+    public class Link : ModelBasic
     {
-        public int Id { get; set; }
-
         public string Path { get; set; }
 
         public int BookId { get; set; } 

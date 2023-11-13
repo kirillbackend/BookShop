@@ -1,11 +1,15 @@
-﻿@model BookLinks.Repositories.Models.Link
+﻿@model BookLinks.WebMVC.Models.LinkModel
 
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Создание ссылки";
 }
 
-<h1>Создание.</h1>
+<div class="container-fluid">
+    <h1 class="text-center">
+        @ViewData["Title"]
+    </h1>
+</div>
 
 <div class="row">
     <div class="form-floating mb-3">
