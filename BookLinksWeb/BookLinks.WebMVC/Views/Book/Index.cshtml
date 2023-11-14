@@ -52,13 +52,14 @@
                 @Html.DisplayNameFor(model => model[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].Author)
+                @Html.DisplayNameFor(model => model[0].Author) - 
+                @Html.DisplayNameFor(model => model[0].Released)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model[0].Rating)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].Released)
+                @Html.DisplayNameFor(model => model[0].Price)
             </th>
             <th>
                 <label>Дайствия</label>
@@ -105,7 +106,7 @@
                     }
                 </td>
                 <td class="col-md-1">
-                    @Html.DisplayFor(modelItem => item.Released)
+                    @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td class="col-md-3" align="center">
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success rounded-pill">

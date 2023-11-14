@@ -45,7 +45,7 @@ namespace BookLinks.Repositories.Repositories
 
         public async Task<User> GetUserByIdAsync(int? id)
         {
-            var user = _dataContext.Users.FirstOrDefault(x => x.Id == id);
+            var user = _dataContext.Users.Include(o => o.Orders).FirstOrDefault(x => x.Id == id);
             return user;
         }
 

@@ -38,5 +38,7 @@ namespace BookLinks.Repositories.Models
         public string? LastLoginIP { get; set; }
 
         public UserRoleEnum Role { get; set; }
+
+        public List<Order> Orders { get; set; }
     }
 }

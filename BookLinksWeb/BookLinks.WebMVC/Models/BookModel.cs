@@ -10,6 +10,10 @@ namespace BookLinks.WebMVC.Models
         [Required]
         public string Name { get; set; }
 
+        [Display(Name = "Цена")]
+        [Required]
+        public decimal Price { get; set; }
+
         [StringLength(10000, MinimumLength = 3)]
         [Display(Name = "Описание")]
         public string Description { get; set; }
@@ -31,6 +35,8 @@ namespace BookLinks.WebMVC.Models
 
         [Display(Name = "Обложка")]
         public string OriginalFileName { get; set; }
+
+        public List<OrderModel> Orders { get; set; }
 
         public List<Link> Links { get; set; }
     }
