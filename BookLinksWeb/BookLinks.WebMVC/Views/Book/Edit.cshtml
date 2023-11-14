@@ -26,6 +26,11 @@
                 <span asp-validation-for="@Model.Author" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="@Model.Price" class="control-label"></label>
+                <input asp-for="@Model.Price" class="form-control" />
+                <span asp-validation-for="@Model.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="@Model.Released" class="control-label"></label>
                 <input asp-for="@Model.Released" class="form-control" />
                 <span asp-validation-for="@Model.Released" class="text-danger"></span>

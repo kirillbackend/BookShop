@@ -46,6 +46,9 @@ namespace BookLinks.Repositories.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Rating")
                         .HasColumnType("INTEGER");
 
@@ -58,6 +61,21 @@ namespace BookLinks.Repositories.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("BookLinks.Repositories.Models.BookOrder", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("OrderId", "BookId");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("BookOrders");
                 });
 
             modelBuilder.Entity("BookLinks.Repositories.Models.Link", b =>
@@ -84,6 +102,37 @@ namespace BookLinks.Repositories.Migrations
                     b.HasIndex("BookId");
 
                     b.ToTable("Links");
+                });
+
+            modelBuilder.Entity("BookLinks.Repositories.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("NumberGoods")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("BookLinks.Repositories.Models.User", b =>
@@ -148,6 +197,25 @@ namespace BookLinks.Repositories.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("BookLinks.Repositories.Models.BookOrder", b =>
+                {
+                    b.HasOne("BookLinks.Repositories.Models.Book", "Book")
+                        .WithMany("BookOrders")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("BookLinks.Repositories.Models.Order", "Order")
+                        .WithMany("BookOrders")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("BookLinks.Repositories.Models.Link", b =>
                 {
                     b.HasOne("BookLinks.Repositories.Models.Book", "Book")
@@ -159,9 +227,32 @@ namespace BookLinks.Repositories.Migrations
                     b.Navigation("Book");
                 });
 
+            modelBuilder.Entity("BookLinks.Repositories.Models.Order", b =>
+                {
+                    b.HasOne("BookLinks.Repositories.Models.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("BookLinks.Repositories.Models.Book", b =>
                 {
+                    b.Navigation("BookOrders");
+
                     b.Navigation("Links");
+                });
+
+            modelBuilder.Entity("BookLinks.Repositories.Models.Order", b =>
+                {
+                    b.Navigation("BookOrders");
+                });
+
+            modelBuilder.Entity("BookLinks.Repositories.Models.User", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

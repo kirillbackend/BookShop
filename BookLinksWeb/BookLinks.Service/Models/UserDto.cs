@@ -1,5 +1,6 @@
 ﻿
 using BookLinks.Common.Enums;
+using BookLinks.Repositories.Models;
 
 namespace BookLinks.Service.Models
 {
@@ -26,5 +27,7 @@ namespace BookLinks.Service.Models
         public string LastLoginIP { get; set; }
 
         public UserRoleEnum Role { get; set; }
+
+        public List<OrderDto> Orders { get; set; }
     }
 }
