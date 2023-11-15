@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using BookLinks.Repositories.Models;
-using BookLinks.Service.Models;
 using BookLinks.Service.Services.Interface;
 using BookLinks.WebMVC.Models;
 using Microsoft.AspNetCore.Authorization;

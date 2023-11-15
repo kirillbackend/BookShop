@@ -43,5 +43,11 @@ namespace BookLinks.Repositories.Repositories
             }
             await _dataContext.SaveChangesAsync();
         }
+
+        public async Task UpdateOrderByBookIdAsync(Order order)
+        {
+            _dataContext.Orders.Update(order);
+            await _dataContext.SaveChangesAsync();
+        }
     }
 }
