@@ -7,5 +7,6 @@ namespace BookLinks.Repositories.Repositories.Interface
         Task<Order> GetOrderByIdAsync(int id);
         Task CreateNewOrderAsync(Order order);
         Task UpdateOrderAsync(int userId, int bookId);
+        Task UpdateOrderByBookIdAsync(Order order);
     }
 }

@@ -39,5 +39,11 @@ namespace BookLinks.Service.Services
         {
             await _orderRepository.UpdateOrderAsync(userId, bookId);
         }
+
+        public async Task UpdateOrderByBookIdAsync(OrderDto orderDto)
+        {
+            var order = _mapper.Map<Order>(orderDto);
+            await _orderRepository.UpdateOrderByBookIdAsync(order);
+        }
     }
 }

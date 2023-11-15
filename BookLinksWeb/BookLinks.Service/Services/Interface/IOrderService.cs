@@ -7,5 +7,6 @@ namespace BookLinks.Service.Services.Interface
         Task<OrderDto> GetOrderByUserIdAsync(int id);
         Task UpdateOrderAsync(int userId, int bookId);
         Task CreateNewOrderAsync(int userId);
+        Task UpdateOrderByBookIdAsync(OrderDto orderDto);
     }
 }

@@ -12,21 +12,17 @@
     </h1>
 </div>
 
-<table class="table table-bordered">
+<table class="table table-bordered border-dark">
     <thead>
         <tr align="center">
             <th>
-                <label> - </label>
+                Обложка
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Id) -
-                @Html.DisplayNameFor(model => model.Price)
+                Информация о книге
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                <label>Дайствия</label>
+                Цена
             </th>
         </tr>
     </thead>
@@ -50,19 +46,27 @@
                         </div>
                     </div>
                 </td>
-                <td class="col-md-3">
+                <td class="col-md-10">
                     <div >
                         <div>
-                            <h4>
-                                @Html.DisplayFor(model => item.Book.Id) -
+                            <h3>
                                 @Html.DisplayFor(model => item.Book.Name)
-                            </h4>
+                            </h3>
                         </div>
                         <div>
-                            <h4>
-                                <label> Дата релиза </label>
+                            <h5>
                                 @Html.DisplayFor(model => item.Book.Author)
-                            </h4>
+                            </h5>
+                        </div>
+                        <div>
+                            <h5>
+                                @Html.DisplayFor(model => item.Book.Released)
+                            </h5>
+                        </div>
+                        <div>
+                            <h5>
+                                @Html.DisplayFor(model => item.Book.Description)
+                            </h5>
                         </div>
                     </div>
                 </td>
@@ -72,22 +76,15 @@
                             @Html.DisplayFor(model => item.Book.Price)
                         </h4>
                     </div>
-                </td>
-                <td class="col-md-3" align="center">
-                    <a asp-controller="Book" asp-action="Details" asp-route-id="@item.Book.Id" class="btn btn-success rounded-pill">
-                        Инфо
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-                        </svg>
-                    </a>
-                    <a asp-controller="Basket" asp-action="Delete" asp-route-id="@item.Book.Id" class="btn btn-danger rounded-pill">
-                        Удалить из карзины
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
-                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
-                        </svg>
-                    </a>
+                    <div>
+                        <a asp-controller="Book" asp-action="Details" asp-route-id="@item.Book.Id" class="btn btn-outline-success">
+                            Инфо
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                            </svg>
+                        </a>
+                    </div>
                 </td>
             </tr>
         }
