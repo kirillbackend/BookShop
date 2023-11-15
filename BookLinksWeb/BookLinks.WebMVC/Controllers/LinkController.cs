@@ -23,14 +23,13 @@ namespace BookLinks.WebMVC.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
         public async Task<IActionResult>Index(string? searchString, LinkOptionsEnum option)
         {
             var allLinksDto = await _linkService.GetLinksAsync();
             if (!string.IsNullOrEmpty(searchString))
             {
                 var result = await _linkService.GetFilterLink(searchString, allLinksDto, option);
-                var filterLinks = _mapper.Map<LinkModel>(result);
+                var filterLinks = _mapper.Map<List<LinkModel>>(result);
                 return View(filterLinks);
             }
             else
@@ -51,9 +50,16 @@ namespace BookLinks.WebMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(LinkModel link)
         {
-            var linkDto = _mapper.Map<LinkDto>(link);
-            await _linkService.AddLinkAsync(linkDto);
-            return RedirectToAction(nameof(Index));
+            if (link == null)
+            {
+                throw new ArgumentNullException(nameof(link));
+            }
+            else
+            {
+                var linkDto = _mapper.Map<LinkDto>(link);
+                await _linkService.AddLinkAsync(linkDto);
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         [HttpGet]
@@ -95,9 +101,16 @@ namespace BookLinks.WebMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(LinkModel link)
         {
-            var linkDto = _mapper.Map<LinkDto>(link);
-            await _linkService.UpdateLinkAsync(linkDto);   
-            return RedirectToAction(nameof(Index));
+            if (link == null)
+            {
+                throw new ArgumentNullException(nameof(link));
+            }
+            else
+            {
+                var linkDto = _mapper.Map<LinkDto>(link);
+                await _linkService.UpdateLinkAsync(linkDto);
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         [HttpGet]
@@ -105,7 +118,7 @@ namespace BookLinks.WebMVC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                throw new ArgumentNullException(nameof(id));
             }
             else
             {

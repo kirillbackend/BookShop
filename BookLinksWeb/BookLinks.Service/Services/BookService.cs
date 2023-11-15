@@ -54,9 +54,9 @@ namespace BookLinks.Service.Services
         {
             if (bookDto != null)
             {
+                await _fileService.ProcessPhoto(bookDto);
                 var book = _mapper.Map<Book>(bookDto);
-                await _fileService.ProcessPhoto(book);
-                book.Created = DateTime.Now;
+                bookDto.Created = DateTime.Now;
                 await _repository.AddBookAsync(book);
             }
             else
@@ -81,8 +81,8 @@ namespace BookLinks.Service.Services
         {
             if (bookDto != null)
             {
+                await _fileService.ProcessPhoto(bookDto);
                 var book = _mapper.Map<Book>(bookDto);
-                await _fileService.ProcessPhoto(book);
                 book.Update = DateTime.Now;
                 await _repository.UpdateBookAsync(book);
             }

@@ -21,7 +21,6 @@ namespace BookLinks.WebMVC.Controllers
             _bookService = bookService;
             _mapper = mapper;
         }
-
         
         public async Task<IActionResult> Index(string? searchString, BookOptiosEnum option)
         {
@@ -46,7 +45,6 @@ namespace BookLinks.WebMVC.Controllers
             {
                 return NotFound();
             }
-
             var bookDto = await _bookService.GetBookByIdAsync(id);
             if (bookDto == null)
             {
@@ -59,9 +57,16 @@ namespace BookLinks.WebMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(BookModel book)
         {
-            var bookDto = _mapper.Map<BookDto>(book);
-            await _bookService.UpdateBookAsync(bookDto);
-            return  RedirectToAction(nameof(Index));
+            if (book == null)
+            {
+                throw new ArgumentNullException(nameof(book));
+            }
+            else
+            {
+                var bookDto = _mapper.Map<BookDto>(book);
+                await _bookService.UpdateBookAsync(bookDto);
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         [AllowAnonymous]
@@ -70,7 +75,7 @@ namespace BookLinks.WebMVC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                throw new ArgumentNullException(nameof(id));
             }
             else
             {
@@ -93,7 +98,7 @@ namespace BookLinks.WebMVC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                throw new ArgumentNullException(nameof(id));
             }
             else
             {
@@ -111,9 +116,16 @@ namespace BookLinks.WebMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(BookModel book)
         {
-            var bookDto = _mapper.Map<BookDto>(book);
-            await _bookService.AddBookAsync(bookDto);
-            return RedirectToAction(nameof(Index));
+            if (book == null)
+            {
+                throw new ArgumentNullException(nameof(book));
+            }
+            else
+            {
+                var bookDto = _mapper.Map<BookDto>(book);
+                await _bookService.AddBookAsync(bookDto);
+                return RedirectToAction(nameof(Index));
+            }
         }
     }
 }

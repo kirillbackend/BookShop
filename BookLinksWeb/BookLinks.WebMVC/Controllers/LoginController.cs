@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Microsoft.Extensions.Primitives;
 using BookLinks.Repositories.Models;
-using BookLinks.Common.Enums;
 using BookLinks.Service.Services.Interface;
 
 namespace BookLinks.WebMVC.Controllers

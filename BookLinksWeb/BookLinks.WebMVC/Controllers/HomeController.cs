@@ -30,18 +30,22 @@ namespace BookLinks.WebMVC.Controllers
             var allBooksDto = await _bookService.GetBooksAsync();
             var allBook = _mapper.Map<List<BookModel>>(allBooksDto);
             var user = HttpContext.User.Claims.Where(i => i.Type == "id").FirstOrDefault();
+
             if (user != null)
             {
                 var userId = Convert.ToInt32(user.Value);
                 var userDto = await _userService.GetUserByIdAsync(userId);
+
                 if (userDto.Orders.Where(o => o.IsActive == true).Count() == 0)
                 {
                     await _orderService.CreateNewOrderAsync(userId);
                 }
+
                 var orderDto = await _orderService.GetOrderByUserIdAsync(userId);
                 var orderModel = _mapper.Map<OrderModel>(orderDto);
                 ViewBag.Order = orderModel.BookOrdersModel.Select(b => b.Book).Select(b => b.Id).ToList();
             }
+
             return View(allBook);
         }
 
