@@ -1,5 +1,4 @@
-﻿using BookLinks.Repositories.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BookLinks.WebMVC.Models
 {
@@ -38,6 +37,6 @@ namespace BookLinks.WebMVC.Models
 
         public List<OrderModel> Orders { get; set; }
 
-        public List<Link> Links { get; set; }
+        public List<LinkModel> Links { get; set; }
     }
 }

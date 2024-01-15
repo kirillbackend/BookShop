@@ -1,9 +1,9 @@
-﻿using BookLinks.Repositories.Models;
+﻿using BookLinks.Service.Models;
 
 namespace FS.Services.Services.Contracts
 {
     public interface IFileService
     {
-        Task ProcessPhoto(Book book);
+        Task ProcessPhoto(BookDto book);
     }
 }

@@ -1,5 +1,4 @@
 ﻿using BookLinks.Common.Enums;
-using BookLinks.Repositories.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace BookLinks.WebMVC.Models

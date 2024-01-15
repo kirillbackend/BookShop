@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using BookLinks.Common.Enums;
-using BookLinks.Repositories.Models;
 using BookLinks.Service.Models;
-using BookLinks.Service.Services;
 using BookLinks.Service.Services.Interface;
 using BookLinks.WebMVC.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -51,12 +49,19 @@ namespace BookLinks.WebMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(UserModel user)
         {
-            user.Created = DateTime.Now;
-            user.Update = DateTime.Now;
-            user.PwdHash = _accountService.GetMD5Hash(user.PwdHash);
-            var userDto = _mapper.Map<UserDto>(user);
-            await _userService.AddUserAsync(userDto);
-            return RedirectToAction("Index", "Login");
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            else
+            {
+                user.Created = DateTime.Now;
+                user.Update = DateTime.Now;
+                user.PwdHash = _accountService.GetMD5Hash(user.PwdHash);
+                var userDto = _mapper.Map<UserDto>(user);
+                await _userService.AddUserAsync(userDto);
+                return RedirectToAction("Index", "Login");
+            }
         }
 
         [HttpGet]
@@ -77,10 +82,17 @@ namespace BookLinks.WebMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(UserModel user)
         {
-            user.Update = DateTime.Now;
-            var userDto = _mapper.Map<UserDto>(user);
-            await _userService.UpdateUserAsync(userDto);
-            return RedirectToAction(nameof(Index));
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            else
+            {
+                user.Update = DateTime.Now;
+                var userDto = _mapper.Map<UserDto>(user);
+                await _userService.UpdateUserAsync(userDto);
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         [HttpGet]

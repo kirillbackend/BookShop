@@ -9,6 +9,7 @@
         @ViewData["Title"]
     </h1>
 </div>
+
 @foreach (var row in Model
    .Select((item, index) => new { item, index })
    .GroupBy(_ => _.index / 4, _ => _.item))

@@ -1,7 +1,4 @@
-﻿
-using BookLinks.Repositories.Models;
-
-namespace BookLinks.Service.Models
+﻿namespace BookLinks.Service.Models
 {
     public class LinkDto : BaseDto
     {
@@ -9,6 +6,6 @@ namespace BookLinks.Service.Models
 
         public int BookId { get; set; }
 
-        public Book? Book { get; set; }
+        public BookDto? Book { get; set; }
     }
 }

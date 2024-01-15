@@ -1,13 +1,12 @@
-﻿using BookLinks.Repositories.Models;
+﻿using BookLinks.Service.Models;
 using FS.Services.Services.Contracts;
-using System.Text.RegularExpressions;
 
 
 namespace FS.Services.Services
 {
     public class FileService: IFileService
     {
-        public async Task ProcessPhoto(Book book)
+        public async Task ProcessPhoto(BookDto book)
         {
             try
             {

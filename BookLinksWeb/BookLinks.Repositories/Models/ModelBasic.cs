@@ -1,5 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BookLinks.Repositories.Models
 {
@@ -7,9 +6,7 @@ namespace BookLinks.Repositories.Models
     {
         [Key]
         public int Id { get; set; }
-
         public DateTime Created { get; set; }
-
         public DateTime Update { get; set; }
     }
 }

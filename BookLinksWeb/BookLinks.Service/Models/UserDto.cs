@@ -1,6 +1,5 @@
-﻿
-using BookLinks.Common.Enums;
-using BookLinks.Repositories.Models;
+﻿using BookLinks.Common.Enums;
+
 
 namespace BookLinks.Service.Models
 {

@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-
 namespace BookLinks.Common.Enums
 {
     public enum LinkOptionsEnum
