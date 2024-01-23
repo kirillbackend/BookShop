@@ -20,7 +20,8 @@ namespace BookLinks.WebMVC.Controllers
             _userService = userService;
             _mapper = mapper;
             _accountService = accountService;
-        } 
+        }
+
 
         public async Task<IActionResult> Index(string? searchString, UserOptionsEnum option)
         {

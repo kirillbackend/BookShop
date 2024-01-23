@@ -7,6 +7,8 @@ using FS.Services.Services.Contracts;
 using FS.Services.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using BookLinks.WebMVC.ActionFilters;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,12 @@ builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddTransient<ILinkService, LinkService>();
 builder.Services.AddTransient<IFileService, FileService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
+
+builder.Services.AddMvc(options =>
+{
+    options.Filters.Add(typeof(LogActionFilter)); // подключение по типу
+});
+
 builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlite(builder.Configuration.GetConnectionString("WebApiDatabase"));
