@@ -30,7 +30,6 @@ namespace BookLinks.Rest.Api
 
             //Фильтры необходимо написать свои и добавить по примеру.
             //builder.RegisterType<BgamingSignActionFilter>().AsSelf();
-            //builder.RegisterType<UserContextActionFilter>().AsSelf();
 
             //Service.ContainerConfiguration.RegisterTypes(builder, settings);
 
